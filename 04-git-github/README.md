@@ -18,13 +18,13 @@ git log --oneline --graph --all
 ### Commands and results
 
 ```bash
-zephoryx@fedora$ bash 04-git-github/scripts/task1-commit-a.sh /tmp/nitish-git-lab-2zv6f5q5
+pujankhunt@archlinux$ bash 04-git-github/scripts/task1-commit-a.sh /tmp/pujan-git-lab-2zv6f5q5
 ############ SETUP: one tracked file, committed ############
 
-zephoryx@fedora$ git log --oneline
+pujankhunt@archlinux$ git log --oneline
 9c1ce63 Initial commit: add tracked.txt
 
-zephoryx@fedora$ cat tracked.txt
+pujankhunt@archlinux$ cat tracked.txt
 version 1
 
 ##################################################################
@@ -33,12 +33,12 @@ version 1
 
 --- modify the tracked file, and create a NEW untracked file ---
 
-zephoryx@fedora$ git status --short
+pujankhunt@archlinux$ git status --short
 M tracked.txt
 ?? untracked.txt
   M = modified but NOT staged   ?? = untracked
 
-zephoryx@fedora$ git commit -m 'try to commit without staging'
+pujankhunt@archlinux$ git commit -m 'try to commit without staging'
 On branch main
 Changes not staged for commit:
   (use "git add <file>..." to update what will be committed)
@@ -54,23 +54,23 @@ no changes added to commit (use "git add" and/or "git commit -a")
 >>>> NOTHING WAS COMMITTED. 'git commit -m' only commits what is in the
 >>>> STAGING AREA (the index). We never ran 'git add', so the index is empty.
 
-zephoryx@fedora$ git log --oneline
+pujankhunt@archlinux$ git log --oneline
 9c1ce63 Initial commit: add tracked.txt
 
 --- the correct 2-step way with plain 'git commit -m' ---
 
-zephoryx@fedora$ git add tracked.txt
+pujankhunt@archlinux$ git add tracked.txt
 
-zephoryx@fedora$ git status --short
+pujankhunt@archlinux$ git status --short
 M  tracked.txt
 ?? untracked.txt
   M in the LEFT column = staged
 
-zephoryx@fedora$ git commit -m 'commit -m: staged change only'
+pujankhunt@archlinux$ git commit -m 'commit -m: staged change only'
 [main 3ca6fb9] commit -m: staged change only
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-zephoryx@fedora$ git status --short
+pujankhunt@archlinux$ git status --short
 ?? untracked.txt
 >>>> untracked.txt is STILL not committed. Correct: it was never added.
 
@@ -80,17 +80,17 @@ zephoryx@fedora$ git status --short
 
 --- modify the tracked file again (untracked.txt still lying around) ---
 
-zephoryx@fedora$ git status --short
+pujankhunt@archlinux$ git status --short
 M tracked.txt
 ?? untracked.txt
 
-zephoryx@fedora$ git commit -a -m 'commit -a -m: auto-stage tracked files'
+pujankhunt@archlinux$ git commit -a -m 'commit -a -m: auto-stage tracked files'
 [main d2d5dd8] commit -a -m: auto-stage tracked files
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 >>>> IT WORKED WITH NO 'git add'. -a auto-staged the modified TRACKED file.
 
-zephoryx@fedora$ git status --short
+pujankhunt@archlinux$ git status --short
 ?? untracked.txt
 
 >>>> BUT untracked.txt is STILL uncommitted!
@@ -101,19 +101,19 @@ zephoryx@fedora$ git status --short
 ##################################################################
 --- add a second tracked file, commit it, then delete it ---
 
-zephoryx@fedora$ rm doomed.txt
+pujankhunt@archlinux$ rm doomed.txt
 
-zephoryx@fedora$ git status --short
+pujankhunt@archlinux$ git status --short
 D doomed.txt
 ?? untracked.txt
   D = deleted, not staged
 
-zephoryx@fedora$ git commit -a -m 'commit -a: also stages deletions'
+pujankhunt@archlinux$ git commit -a -m 'commit -a: also stages deletions'
 [main 02bc883] commit -a: also stages deletions
  1 file changed, 1 deletion(-)
  delete mode 100644 doomed.txt
 
-zephoryx@fedora$ git status --short
+pujankhunt@archlinux$ git status --short
 ?? untracked.txt
 >>>> YES: -a stages MODIFICATIONS and DELETIONS of tracked files.
 
@@ -121,16 +121,16 @@ zephoryx@fedora$ git status --short
 #  Getting untracked.txt in requires an explicit 'git add'        #
 ##################################################################
 
-zephoryx@fedora$ git add untracked.txt && git commit -m 'add the new file explicitly'
+pujankhunt@archlinux$ git add untracked.txt && git commit -m 'add the new file explicitly'
 
-zephoryx@fedora$ git status --short   (now clean)
+pujankhunt@archlinux$ git status --short   (now clean)
 (no output above = working tree clean)
 
 ##################################################################
 #  SUMMARY                                                        #
 ##################################################################
 
-zephoryx@fedora$ git log --oneline
+pujankhunt@archlinux$ git log --oneline
 5dc8443 add the new file explicitly
 02bc883 commit -a: also stages deletions
 b6fd599 add doomed.txt
@@ -141,7 +141,7 @@ d2d5dd8 commit -a -m: auto-stage tracked files
   committing. It is NOT "git add -A" / "git add ." — new files are never
   included. That is the single most common misconception about this flag.
 
-zephoryx@fedora$ bash 04-git-github/scripts/task2-cherry-pick.sh /tmp/nitish-git-lab-wapwlmd4
+pujankhunt@archlinux$ bash 04-git-github/scripts/task2-cherry-pick.sh /tmp/pujan-git-lab-wapwlmd4
 ##################################################################
 #  STEP 1: create 3 commits on main                               #
 ##################################################################
@@ -153,17 +153,17 @@ zephoryx@fedora$ bash 04-git-github/scripts/task2-cherry-pick.sh /tmp/nitish-git
 #  STEP 2: view the commits with git log                          #
 ##################################################################
 
-zephoryx@fedora$ git log --oneline
+pujankhunt@archlinux$ git log --oneline
 82ebc9f C3: document setup in README
 fc503c2 C2: add app.py
 341681a C1: add README
 
-zephoryx@fedora$ git log --oneline --graph --decorate
+pujankhunt@archlinux$ git log --oneline --graph --decorate
 * 82ebc9f (HEAD -> main) C3: document setup in README
 * fc503c2 C2: add app.py
 * 341681a C1: add README
 
-zephoryx@fedora$ git log --stat -1
+pujankhunt@archlinux$ git log --stat -1
 commit 82ebc9f81bcfd28434cfb47e5cc3994bd950ef8f
 Author: Pujan Khunt <support@symbiotes.in>
 Date:   Wed Oct 7 18:31:03 2026 +0530
@@ -177,10 +177,10 @@ Date:   Wed Oct 7 18:31:03 2026 +0530
 #  STEP 3: create a new branch and switch to it                   #
 ##################################################################
 
-zephoryx@fedora$ git checkout -b feature
+pujankhunt@archlinux$ git checkout -b feature
 Switched to a new branch 'feature'
 
-zephoryx@fedora$ git branch
+pujankhunt@archlinux$ git branch
 * feature
   main
 
@@ -195,7 +195,7 @@ zephoryx@fedora$ git branch
 #  STEP 5: git log to IDENTIFY the specific commit                #
 ##################################################################
 
-zephoryx@fedora$ git log --oneline
+pujankhunt@archlinux$ git log --oneline
 4234a1e F3: rewrite app.py to use utils.greet()
 881a9ea F2: add .gitignore  <-- THIS is the one we will cherry-pick
 f6eb3ed F1: add utils.py with greet()
@@ -203,7 +203,7 @@ f6eb3ed F1: add utils.py with greet()
 fc503c2 C2: add app.py
 341681a C1: add README
 
-zephoryx@fedora$ git log --oneline --graph --decorate --all
+pujankhunt@archlinux$ git log --oneline --graph --decorate --all
 * 4234a1e (HEAD -> feature) F3: rewrite app.py to use utils.greet()
 * 881a9ea F2: add .gitignore  <-- THIS is the one we will cherry-pick
 * f6eb3ed F1: add utils.py with greet()
@@ -213,12 +213,12 @@ zephoryx@fedora$ git log --oneline --graph --decorate --all
 
 --- find the commit that adds .gitignore ---
 
-zephoryx@fedora$ git log --oneline --all -- .gitignore
+pujankhunt@archlinux$ git log --oneline --all -- .gitignore
 881a9ea F2: add .gitignore  <-- THIS is the one we will cherry-pick
 
 Identified target commit: 881a9ea
 
-zephoryx@fedora$ git show --stat 881a9ea
+pujankhunt@archlinux$ git show --stat 881a9ea
 commit 881a9ea3d36ccca19875088cffc28d48878626a3
 Author: Pujan Khunt <support@symbiotes.in>
 Date:   Wed Oct 7 18:31:03 2026 +0530
@@ -232,24 +232,24 @@ Date:   Wed Oct 7 18:31:03 2026 +0530
 #  STEP 6: switch back to main and CHERRY-PICK that one commit    #
 ##################################################################
 
-zephoryx@fedora$ git checkout main
+pujankhunt@archlinux$ git checkout main
 Switched to branch 'main'
 
 --- BEFORE: main does NOT have .gitignore ---
 
-zephoryx@fedora$ ls -a
+pujankhunt@archlinux$ ls -a
 .
 ..
 .git
 README.md
 app.py
 
-zephoryx@fedora$ git log --oneline
+pujankhunt@archlinux$ git log --oneline
 82ebc9f C3: document setup in README
 fc503c2 C2: add app.py
 341681a C1: add README
 
-zephoryx@fedora$ git cherry-pick 881a9ea
+pujankhunt@archlinux$ git cherry-pick 881a9ea
 [main 2448f8a] F2: add .gitignore  <-- THIS is the one we will cherry-pick
  Date: Wed Oct 7 18:31:03 2026 +0530
  1 file changed, 3 insertions(+)
@@ -261,7 +261,7 @@ zephoryx@fedora$ git cherry-pick 881a9ea
 
 --- AFTER: .gitignore now exists on main ---
 
-zephoryx@fedora$ ls -a
+pujankhunt@archlinux$ ls -a
 .
 ..
 .git
@@ -269,18 +269,18 @@ zephoryx@fedora$ ls -a
 README.md
 app.py
 
-zephoryx@fedora$ cat .gitignore
+pujankhunt@archlinux$ cat .gitignore
 __pycache__/
 *.pyc
 .env
 
-zephoryx@fedora$ git log --oneline
+pujankhunt@archlinux$ git log --oneline
 2448f8a F2: add .gitignore  <-- THIS is the one we will cherry-pick
 82ebc9f C3: document setup in README
 fc503c2 C2: add app.py
 341681a C1: add README
 
-zephoryx@fedora$ git log --oneline --graph --decorate --all
+pujankhunt@archlinux$ git log --oneline --graph --decorate --all
 * 2448f8a (HEAD -> main) F2: add .gitignore  <-- THIS is the one we will cherry-pick
 | * 4234a1e (feature) F3: rewrite app.py to use utils.greet()
 | * 881a9ea F2: add .gitignore  <-- THIS is the one we will cherry-pick
@@ -292,19 +292,19 @@ zephoryx@fedora$ git log --oneline --graph --decorate --all
 
 --- proof the file is tracked on main, not just sitting on disk ---
 
-zephoryx@fedora$ git ls-files
+pujankhunt@archlinux$ git ls-files
 .gitignore
 README.md
 app.py
 
-zephoryx@fedora$ git log --oneline main -- .gitignore
+pujankhunt@archlinux$ git log --oneline main -- .gitignore
 2448f8a F2: add .gitignore  <-- THIS is the one we will cherry-pick
 
 --- the cherry-picked commit has a NEW hash (different commit object) ---
 original on feature : 881a9ea
 copy on main        : 2448f8a
 
-zephoryx@fedora$ git show --stat HEAD
+pujankhunt@archlinux$ git show --stat HEAD
 commit 2448f8a53357fd646a3dfd91d5ceefa83bc0e96a
 Author: Pujan Khunt <support@symbiotes.in>
 Date:   Wed Oct 7 18:31:03 2026 +0530
@@ -316,16 +316,16 @@ Date:   Wed Oct 7 18:31:03 2026 +0530
 
 --- but the CONTENT (the tree/patch) is identical ---
 
-zephoryx@fedora$ diff <(git show 881a9ea -- .gitignore) <(git show HEAD -- .gitignore)
+pujankhunt@archlinux$ diff <(git show 881a9ea -- .gitignore) <(git show HEAD -- .gitignore)
 IDENTICAL patch — same change, new commit.
 
 --- F1 and F3 were NOT brought over: only the one commit was picked ---
 
-zephoryx@fedora$ ls
+pujankhunt@archlinux$ ls
 README.md
 app.py
 
-zephoryx@fedora$ git log --oneline main
+pujankhunt@archlinux$ git log --oneline main
 2448f8a F2: add .gitignore  <-- THIS is the one we will cherry-pick
 82ebc9f C3: document setup in README
 fc503c2 C2: add app.py
@@ -337,19 +337,19 @@ fc503c2 C2: add app.py
 ##################################################################
 --- cherry-pick F3, which rewrites app.py and needs utils.py ---
 
-zephoryx@fedora$ git cherry-pick 4234a1e
+pujankhunt@archlinux$ git cherry-pick 4234a1e
 [main 7fa5f12] F3: rewrite app.py to use utils.greet()
  Date: Wed Oct 7 18:31:03 2026 +0530
  1 file changed, 3 insertions(+), 1 deletion(-)
 
 >> It applied cleanly, BUT the code is now BROKEN on main:
 
-zephoryx@fedora$ cat app.py
+pujankhunt@archlinux$ cat app.py
 from utils import greet
 
 print(greet("DevOps"))
 
-zephoryx@fedora$ ls utils.py
+pujankhunt@archlinux$ ls utils.py
 ls: cannot access 'utils.py': No such file or directory
 utils.py does NOT exist on main!
 
@@ -357,10 +357,10 @@ utils.py does NOT exist on main!
 >> dependencies. app.py imports utils.greet, but F1 (which created
 >> utils.py) was never picked. Git cannot know that.
 
-zephoryx@fedora$ git reset --hard HEAD~1   # undo it
+pujankhunt@archlinux$ git reset --hard HEAD~1   # undo it
 HEAD is now at 2448f8a F2: add .gitignore  <-- THIS is the one we will cherry-pick
 
-zephoryx@fedora$ git log --oneline main   (final state)
+pujankhunt@archlinux$ git log --oneline main   (final state)
 2448f8a F2: add .gitignore  <-- THIS is the one we will cherry-pick
 82ebc9f C3: document setup in README
 fc503c2 C2: add app.py

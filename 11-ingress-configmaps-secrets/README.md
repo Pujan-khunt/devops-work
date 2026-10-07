@@ -35,18 +35,18 @@ TEST SUITE: None
 NOTES:
 homework-ingress with docker.io/traefik:v3.7.13 has been deployed successfully on homework-ingress namespace!
 
-zephoryx@fedora$ kubectl get ingressclass
+pujankhunt@archlinux$ kubectl get ingressclass
 NAME      CONTROLLER                      PARAMETERS   AGE
 traefik   traefik.io/ingress-controller   <none>       1s
 
-zephoryx@fedora$ curl -f -H Host:homework.local http://127.0.0.1:18082
+pujankhunt@archlinux$ curl -f -H Host:homework.local http://127.0.0.1:18082
 <h1>Welcome to nginx!</h1>
 ```
 
 ### Ingress routing check
 
 ```bash
-zephoryx@fedora$ curl -f -H Host:homework.local http://127.0.0.1:18082
+pujankhunt@archlinux$ curl -f -H Host:homework.local http://127.0.0.1:18082
 curl: (22) The requested URL returned error: 404
 Warning: Problem (retrying all errors). Will retry in 1 second. 10 retries
 Warning: left.
@@ -62,7 +62,7 @@ Warning: Problem (retrying all errors). Will retry in 1 second. 1 retry left.
 
 curl: (22) The requested URL returned error: 404
 
-zephoryx@fedora$ kubectl -n homework-s12 get ingress
+pujankhunt@archlinux$ kubectl -n homework-s12 get ingress
 NAME   CLASS     HOSTS            ADDRESS   PORTS   AGE
 web    traefik   homework.local             80      8m49s
 ```
@@ -70,65 +70,65 @@ web    traefik   homework.local             80      8m49s
 ### Commands and results
 
 ```bash
-zephoryx@fedora$ kubectl create namespace homework-s12
+pujankhunt@archlinux$ kubectl create namespace homework-s12
 namespace/homework-s12 created
 
-zephoryx@fedora$ kubectl -n homework-s12 apply -f 11-ingress-configmaps-secrets/configmap.yaml
+pujankhunt@archlinux$ kubectl -n homework-s12 apply -f 11-ingress-configmaps-secrets/configmap.yaml
 configmap/app-config created
 
-zephoryx@fedora$ kubectl -n homework-s12 apply -f 11-ingress-configmaps-secrets/secret.example.yaml
+pujankhunt@archlinux$ kubectl -n homework-s12 apply -f 11-ingress-configmaps-secrets/secret.example.yaml
 secret/demo-secret created
 
-zephoryx@fedora$ kubectl -n homework-s12 apply -f 11-ingress-configmaps-secrets/app.yaml
+pujankhunt@archlinux$ kubectl -n homework-s12 apply -f 11-ingress-configmaps-secrets/app.yaml
 deployment.apps/web created
 service/web created
 
-zephoryx@fedora$ kubectl -n homework-s12 rollout status deployment/web
+pujankhunt@archlinux$ kubectl -n homework-s12 rollout status deployment/web
 Waiting for deployment "web" rollout to finish: 0 of 2 updated replicas are available...
 Waiting for deployment "web" rollout to finish: 1 of 2 updated replicas are available...
 deployment "web" successfully rolled out
 
-zephoryx@fedora$ kubectl -n homework-s12 exec deployment/web -- sh -c 'printf "APP_MODE=%s\nWELCOME=%s\n" "$APP_MODE" "$WELCOME"; test "$DEMO_PASSWORD" = "classroom-example-only" && echo "Demo Secret injected: verified"'
+pujankhunt@archlinux$ kubectl -n homework-s12 exec deployment/web -- sh -c 'printf "APP_MODE=%s\nWELCOME=%s\n" "$APP_MODE" "$WELCOME"; test "$DEMO_PASSWORD" = "classroom-example-only" && echo "Demo Secret injected: verified"'
 APP_MODE=homework
 WELCOME=Hello students
 Demo Secret injected: verified
 
-zephoryx@fedora$ kubectl -n homework-s12 apply -f 11-ingress-configmaps-secrets/ingress.yaml
+pujankhunt@archlinux$ kubectl -n homework-s12 apply -f 11-ingress-configmaps-secrets/ingress.yaml
 ingress.networking.k8s.io/web created
 
-zephoryx@fedora$ kubectl -n homework-s12 get ingress
+pujankhunt@archlinux$ kubectl -n homework-s12 get ingress
 NAME   CLASS     HOSTS            ADDRESS   PORTS   AGE
 web    traefik   homework.local             80      1s
 
-zephoryx@fedora$ kubectl -n homework-s12 run client --image=busybox:1.37 --restart=Never -- sleep 7200
+pujankhunt@archlinux$ kubectl -n homework-s12 run client --image=busybox:1.37 --restart=Never -- sleep 7200
 pod/client created
 
-zephoryx@fedora$ kubectl -n homework-s12 wait --for=condition=Ready pod/client
+pujankhunt@archlinux$ kubectl -n homework-s12 wait --for=condition=Ready pod/client
 pod/client condition met
 
-zephoryx@fedora$ kubectl -n homework-s12 exec client -- wget -qO- http://web
+pujankhunt@archlinux$ kubectl -n homework-s12 exec client -- wget -qO- http://web
 <h1>Welcome to nginx!</h1>
 
-zephoryx@fedora$ bash -c 'echo "mypassword" | base64; printf %s "mypassword" | base64; echo; echo "mypassword" | od -An -tx1; printf %s "mypassword" | od -An -tx1'
+pujankhunt@archlinux$ bash -c 'echo "mypassword" | base64; printf %s "mypassword" | base64; echo; echo "mypassword" | od -An -tx1; printf %s "mypassword" | od -An -tx1'
 bXlwYXNzd29yZAo=
 bXlwYXNzd29yZA==
 
  6d 79 70 61 73 73 77 6f 72 64 0a
  6d 79 70 61 73 73 77 6f 72 64
 
-zephoryx@fedora$ kubectl -n homework-s12 create secret generic newline-demo '--from-literal=PASSWORD=mypassword
+pujankhunt@archlinux$ kubectl -n homework-s12 create secret generic newline-demo '--from-literal=PASSWORD=mypassword
 '
 secret/newline-demo created
 
-zephoryx@fedora$ kubectl -n homework-s12 get secret newline-demo -o 'jsonpath={.data.PASSWORD}'
+pujankhunt@archlinux$ kubectl -n homework-s12 get secret newline-demo -o 'jsonpath={.data.PASSWORD}'
 bXlwYXNzd29yZAo=
 
-zephoryx@fedora$ kubectl -n homework-s12 delete secret newline-demo
+pujankhunt@archlinux$ kubectl -n homework-s12 delete secret newline-demo
 secret "newline-demo" deleted from homework-s12 namespace
 
-zephoryx@fedora$ kubectl -n homework-s12 create secret generic newline-demo --from-literal=PASSWORD=mypassword
+pujankhunt@archlinux$ kubectl -n homework-s12 create secret generic newline-demo --from-literal=PASSWORD=mypassword
 secret/newline-demo created
 
-zephoryx@fedora$ kubectl -n homework-s12 get secret newline-demo -o 'jsonpath={.data.PASSWORD}'
+pujankhunt@archlinux$ kubectl -n homework-s12 get secret newline-demo -o 'jsonpath={.data.PASSWORD}'
 bXlwYXNzd29yZA==
 ```

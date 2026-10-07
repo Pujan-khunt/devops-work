@@ -18,4 +18,4 @@ Gitleaks also passed. A clean result means the configured checks found no matchi
 
 The example Kubernetes Secret is a dummy lab value. Real secrets, `.env` files and Terraform state stay out of Git.
 
-[Successful pipeline](https://github.com/ThereIsSomething/devops-work/actions/runs/37630785578)
+[Successful pipeline](https://github.com/Pujan-khunt/devops-work/actions/runs/37630785578)

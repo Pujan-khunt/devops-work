@@ -15,7 +15,7 @@ python3 scripts/run_basics.py 3
 ## Commands and output
 
 ```bash
-zephoryx@fedora$ bash 02-shell-scripting/sysinfo.sh
+pujankhunt@archlinux$ bash 02-shell-scripting/sysinfo.sh
 $ bash 02-shell-scripting/sysinfo.sh
 ===========================================================
             SYSTEM INFORMATION REPORT
@@ -23,7 +23,7 @@ $ bash 02-shell-scripting/sysinfo.sh
 # ... output shortened ...
 
 ===========================================================
- Report saved to: /tmp/nitish-sysinfo-s0q16aw9/processes_2026-10-07_18-31-01.txt
+ Report saved to: /tmp/pujan-sysinfo-s0q16aw9/processes_2026-10-07_18-31-01.txt
  Done.
 ===========================================================
 ```

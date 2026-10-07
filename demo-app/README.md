@@ -34,8 +34,8 @@ The CI run below passed the tests, Bandit, dependency audits, Gitleaks and both 
 
 The [workflow](../.github/workflows/devops.yml) builds both images, scans them, tests a Helm deployment in kind and publishes SHA-tagged images to GHCR. A failed check stops publication.
 
-- [Successful CI run](https://github.com/ThereIsSomething/devops-work/actions/runs/37630785578)
-- [Successful Azure deployment](https://github.com/ThereIsSomething/devops-work/actions/runs/37631537431)
+- [Successful CI run](https://github.com/Pujan-khunt/devops-work/actions/runs/37630785578)
+- [Successful Azure deployment](https://github.com/Pujan-khunt/devops-work/actions/runs/37631537431)
 - [Security checks](security/README.md)
 
 The Azure run used images tagged `e45aaec63c7220da29f099eecb0f16d6f30ceb21`. It logged in through OIDC, deployed with Helm and checked the API and database readiness.
@@ -56,7 +56,7 @@ The final Azure workflow authenticated with GitHub OIDC, deployed the exact imag
 For the persistence check, I created a task, replaced `postgres-0`, waited for its replacement, then read the same task back from the managed disk and deleted it. The frontend Service was restored to ClusterIP after the browser check.
 
 ```bash
-zephoryx@fedora$ kubectl -n homework-final get pods,svc,pvc,hpa,ingress
+pujankhunt@archlinux$ kubectl -n homework-final get pods,svc,pvc,hpa,ingress
 NAME                            READY   STATUS      RESTARTS        AGE
 pod/backend-56c8f8bb87-rhq6q    1/1     Running     1 (3m25s ago)   6m26s
 pod/backend-56c8f8bb87-znxvn    1/1     Running     1 (3m30s ago)   6m41s
@@ -67,26 +67,26 @@ horizontalpodautoscaler.autoscaling/backend   Deployment/backend   cpu: 3%/60%  
 NAME                                  CLASS     HOSTS             ADDRESS           PORTS   AGE
 ingress.networking.k8s.io/taskboard   traefik   taskboard.local   135.235.247.178   80      6m41s
 
-zephoryx@fedora$ kubectl -n homework-final patch svc frontend --type=merge -p '{"spec":{"type":"LoadBalancer"}}'
+pujankhunt@archlinux$ kubectl -n homework-final patch svc frontend --type=merge -p '{"spec":{"type":"LoadBalancer"}}'
 service/frontend patched
 
-zephoryx@fedora$ kubectl -n homework-final get svc frontend -o wide
+pujankhunt@archlinux$ kubectl -n homework-final get svc frontend -o wide
 NAME       TYPE           CLUSTER-IP    EXTERNAL-IP   PORT(S)        AGE     SELECTOR
 frontend   LoadBalancer   10.0.219.40   4.186.51.68   80:30273/TCP   6m57s   app=taskboard-frontend
 
-zephoryx@fedora$ curl -f http://4.186.51.68/health
+pujankhunt@archlinux$ curl -f http://4.186.51.68/health
 {"status":"UP"}
 
 HTTP POST http://4.186.51.68/api/tasks
 201 {"title":"Verify Azure disk persistence","description":"Real AKS managed-csi persistence test","priority":"LOW","status":"TODO","assignee":"Pujan Khunt","id":1,"created_at":"2026-10-07T13:47:49.342325Z"}
 
-zephoryx@fedora$ kubectl -n homework-final delete pod postgres-0
+pujankhunt@archlinux$ kubectl -n homework-final delete pod postgres-0
 pod "postgres-0" deleted from homework-final namespace
 
-zephoryx@fedora$ kubectl -n homework-final wait --for=create pod/postgres-0
+pujankhunt@archlinux$ kubectl -n homework-final wait --for=create pod/postgres-0
 pod/postgres-0 condition met
 
-zephoryx@fedora$ kubectl -n homework-final wait --for=condition=Ready pod/postgres-0
+pujankhunt@archlinux$ kubectl -n homework-final wait --for=condition=Ready pod/postgres-0
 pod/postgres-0 condition met
 
 HTTP GET http://4.186.51.68/api/tasks/1
@@ -95,14 +95,14 @@ HTTP GET http://4.186.51.68/api/tasks/1
 HTTP DELETE http://4.186.51.68/api/tasks/1
 204
 
-zephoryx@fedora$ kubectl -n homework-final patch svc frontend --type=merge -p '{"spec":{"type":"ClusterIP"}}'
+pujankhunt@archlinux$ kubectl -n homework-final patch svc frontend --type=merge -p '{"spec":{"type":"ClusterIP"}}'
 service/frontend patched
 
-zephoryx@fedora$ kubectl -n homework-final get svc frontend
+pujankhunt@archlinux$ kubectl -n homework-final get svc frontend
 NAME       TYPE        CLUSTER-IP    EXTERNAL-IP   PORT(S)   AGE
 frontend   ClusterIP   10.0.219.40   <none>        80/TCP    8m28s
 
-zephoryx@fedora$ kubectl -n homework-final top pods
+pujankhunt@archlinux$ kubectl -n homework-final top pods
 NAME                        CPU(cores)   MEMORY(bytes)
 backend-56c8f8bb87-rhq6q    4m           69Mi
 backend-56c8f8bb87-znxvn    4m           68Mi
@@ -116,10 +116,10 @@ postgres-0                  13m          19Mi
 The storage, VM and AKS exercises were destroyed after verification. The final subscription checks returned empty lists:
 
 ```bash
-zephoryx@fedora$ az resource list -o json
+pujankhunt@archlinux$ az resource list -o json
 []
 
-zephoryx@fedora$ az group list -o json
+pujankhunt@archlinux$ az group list -o json
 []
 ```
 

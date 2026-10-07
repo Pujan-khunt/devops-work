@@ -20,7 +20,7 @@ CI runs the nine API tests, builds the frontend and checks the code and dependen
 I checked both runs from my terminal. The output below shows the workflow and job results; annotations are omitted here.
 
 ```bash
-zephoryx@fedora$ gh run view 37630785578
+pujankhunt@archlinux$ gh run view 37630785578
 ✓ main TaskBoard CI, DevSecOps and deployment verification · 37630785578
 Triggered via push about 1 hour ago
 
@@ -28,7 +28,7 @@ JOBS
 ✓ build-test-security in 32s (ID 112824778114)
 ✓ build-scan-deploy in 3m6s (ID 112825056983)
 
-zephoryx@fedora$ gh run view 37631537431
+pujankhunt@archlinux$ gh run view 37631537431
 ✓ main Deploy verified TaskBoard images to Azure AKS · 37631537431
 Triggered via workflow_dispatch about 1 hour ago
 
@@ -36,4 +36,4 @@ JOBS
 ✓ deploy in 7m30s (ID 112826801768)
 ```
 
-[Successful CI run](https://github.com/ThereIsSomething/devops-work/actions/runs/37630785578) · [Successful Azure deployment](https://github.com/ThereIsSomething/devops-work/actions/runs/37631537431)
+[Successful CI run](https://github.com/Pujan-khunt/devops-work/actions/runs/37630785578) · [Successful Azure deployment](https://github.com/Pujan-khunt/devops-work/actions/runs/37631537431)

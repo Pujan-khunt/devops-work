@@ -34,7 +34,7 @@ Results from 7 October 2026. Build and diagnostic output is shortened.
 ### Explicit Helm install
 
 ```bash
-zephoryx@fedora$ helm install explicit-install 14-helm/chart -n homework-s15 --wait
+pujankhunt@archlinux$ helm install explicit-install 14-helm/chart -n homework-s15 --wait
 NAME: explicit-install
 LAST DEPLOYED: Wed Oct  7 18:32:23 2026
 NAMESPACE: homework-s15
@@ -43,29 +43,29 @@ REVISION: 1
 DESCRIPTION: Install complete
 TEST SUITE: None
 
-zephoryx@fedora$ helm uninstall explicit-install -n homework-s15
+pujankhunt@archlinux$ helm uninstall explicit-install -n homework-s15
 release "explicit-install" uninstalled
 ```
 
 ### Commands and results
 
 ```bash
-zephoryx@fedora$ kubectl create namespace homework-s15
+pujankhunt@archlinux$ kubectl create namespace homework-s15
 namespace/homework-s15 created
 
-zephoryx@fedora$ helm create '/home/zephoryx/Documents/Academics/SST/TERM - IX/DevOps/devops-work/14-helm/generated-example'
-Creating /home/zephoryx/Documents/Academics/SST/TERM - IX/DevOps/devops-work/14-helm/generated-example
+pujankhunt@archlinux$ helm create '/home/pujankhunt/Documents/Academics/SST/TERM - IX/DevOps/devops-work/14-helm/generated-example'
+Creating /home/pujankhunt/Documents/Academics/SST/TERM - IX/DevOps/devops-work/14-helm/generated-example
 
-zephoryx@fedora$ helm repo add traefik https://traefik.github.io/charts --force-update
+pujankhunt@archlinux$ helm repo add traefik https://traefik.github.io/charts --force-update
 "traefik" has been added to your repositories
 
-zephoryx@fedora$ helm repo update
+pujankhunt@archlinux$ helm repo update
 Hang tight while we grab the latest from your chart repositories...
 ...Successfully got an update from the "traefik" chart repository
 ...Successfully got an update from the "bitnami" chart repository
 Update Complete. ⎈Happy Helming!⎈
 
-zephoryx@fedora$ helm search repo traefik/traefik --versions
+pujankhunt@archlinux$ helm search repo traefik/traefik --versions
 NAME                	CHART VERSION	APP VERSION	DESCRIPTION
 traefik/traefik     	41.6.1       	v3.7.13    	A Traefik based Kubernetes ingress controller
 traefik/traefik     	41.6.0       	v3.7.13    	A Traefik based Kubernetes ingress controller
@@ -81,13 +81,13 @@ traefik/traefikee   	0.1.3        	2.5.1      	Traefik Enterprise is a unified c
 traefik/traefikee   	0.1.2        	2.5.0      	Traefik Enterprise is a unified cloud-native ne...
 traefik/traefikee   	0.1.1        	2.5.0      	Traefik Enterprise is a unified cloud-native ne...
 
-zephoryx@fedora$ helm lint 14-helm/chart
+pujankhunt@archlinux$ helm lint 14-helm/chart
 ==> Linting 14-helm/chart
 [INFO] Chart.yaml: icon is recommended
 
 1 chart(s) linted, 0 chart(s) failed
 
-zephoryx@fedora$ helm template guestbook 14-helm/chart -n homework-s15
+pujankhunt@archlinux$ helm template guestbook 14-helm/chart -n homework-s15
 ---
 # Source: homework-web/templates/app.yaml
 apiVersion: v1
@@ -103,7 +103,7 @@ metadata:
           configMap:
             name: guestbook-page
 
-zephoryx@fedora$ helm upgrade --install guestbook 14-helm/chart -n homework-s15 --wait --timeout 180s
+pujankhunt@archlinux$ helm upgrade --install guestbook 14-helm/chart -n homework-s15 --wait --timeout 180s
 Release "guestbook" does not exist. Installing it now.
 NAME: guestbook
 LAST DEPLOYED: Wed Oct  7 18:29:33 2026
@@ -113,17 +113,17 @@ REVISION: 1
 DESCRIPTION: Install complete
 TEST SUITE: None
 
-zephoryx@fedora$ kubectl -n homework-s15 run client --image=busybox:1.37 --restart=Never -- sleep 7200
+pujankhunt@archlinux$ kubectl -n homework-s15 run client --image=busybox:1.37 --restart=Never -- sleep 7200
 pod/client created
 
-zephoryx@fedora$ kubectl -n homework-s15 wait --for=condition=Ready pod/client
+pujankhunt@archlinux$ kubectl -n homework-s15 wait --for=condition=Ready pod/client
 pod/client condition met
 
-zephoryx@fedora$ helm list -n homework-s15
+pujankhunt@archlinux$ helm list -n homework-s15
 NAME     	NAMESPACE   	REVISION	UPDATED                                	STATUS  	CHART             	APP VERSION
 guestbook	homework-s15	1       	2026-10-07 18:29:33.625287824 +0530 IST	deployed	homework-web-0.1.0	1.28
 
-zephoryx@fedora$ helm status guestbook -n homework-s15
+pujankhunt@archlinux$ helm status guestbook -n homework-s15
 NAME: guestbook
 LAST DEPLOYED: Wed Oct  7 18:29:33 2026
 NAMESPACE: homework-s15
@@ -139,11 +139,11 @@ guestbook-5d65948446-tmqdq   1/1     Running   0          3s
 
 TEST SUITE: None
 
-zephoryx@fedora$ helm get values guestbook -n homework-s15
+pujankhunt@archlinux$ helm get values guestbook -n homework-s15
 USER-SUPPLIED VALUES:
 null
 
-zephoryx@fedora$ helm get manifest guestbook -n homework-s15
+pujankhunt@archlinux$ helm get manifest guestbook -n homework-s15
 ---
 # Source: homework-web/templates/app.yaml
 apiVersion: v1
@@ -159,10 +159,10 @@ metadata:
           configMap:
             name: guestbook-page
 
-zephoryx@fedora$ kubectl -n homework-s15 exec client -- wget -qO- http://guestbook
+pujankhunt@archlinux$ kubectl -n homework-s15 exec client -- wget -qO- http://guestbook
 Welcome to my guestbook - version one
 
-zephoryx@fedora$ helm upgrade guestbook 14-helm/chart -n homework-s15 --set 'message=Welcome to my guestbook - version two' --wait --timeout 180s
+pujankhunt@archlinux$ helm upgrade guestbook 14-helm/chart -n homework-s15 --set 'message=Welcome to my guestbook - version two' --wait --timeout 180s
 Release "guestbook" has been upgraded. Happy Helming!
 NAME: guestbook
 LAST DEPLOYED: Wed Oct  7 18:29:38 2026
@@ -172,10 +172,10 @@ REVISION: 2
 DESCRIPTION: Upgrade complete
 TEST SUITE: None
 
-zephoryx@fedora$ kubectl -n homework-s15 exec client -- wget -qO- http://guestbook
+pujankhunt@archlinux$ kubectl -n homework-s15 exec client -- wget -qO- http://guestbook
 Welcome to my guestbook - version two
 
-zephoryx@fedora$ helm upgrade guestbook 14-helm/chart -n homework-s15 --set 'message=Welcome to my guestbook - version three' --wait --timeout 180s
+pujankhunt@archlinux$ helm upgrade guestbook 14-helm/chart -n homework-s15 --set 'message=Welcome to my guestbook - version three' --wait --timeout 180s
 Release "guestbook" has been upgraded. Happy Helming!
 NAME: guestbook
 LAST DEPLOYED: Wed Oct  7 18:29:51 2026
@@ -185,33 +185,33 @@ REVISION: 3
 DESCRIPTION: Upgrade complete
 TEST SUITE: None
 
-zephoryx@fedora$ kubectl -n homework-s15 exec client -- wget -qO- http://guestbook
+pujankhunt@archlinux$ kubectl -n homework-s15 exec client -- wget -qO- http://guestbook
 wget: can't connect to remote host (10.104.209.237): Connection refused
 command terminated with exit code 1
 # Exit status: 1
 
-zephoryx@fedora$ helm history guestbook -n homework-s15
+pujankhunt@archlinux$ helm history guestbook -n homework-s15
 REVISION	UPDATED                 	STATUS    	CHART             	APP VERSION	DESCRIPTION
 1       	Wed Oct  7 18:29:33 2026	superseded	homework-web-0.1.0	1.28       	Install complete
 2       	Wed Oct  7 18:29:38 2026	superseded	homework-web-0.1.0	1.28       	Upgrade complete
 3       	Wed Oct  7 18:29:51 2026	deployed  	homework-web-0.1.0	1.28       	Upgrade complete
 
-zephoryx@fedora$ helm rollback guestbook 1 -n homework-s15 --wait --timeout 180s
+pujankhunt@archlinux$ helm rollback guestbook 1 -n homework-s15 --wait --timeout 180s
 Rollback was a success! Happy Helming!
 
-zephoryx@fedora$ kubectl -n homework-s15 exec client -- wget -qO- http://guestbook
+pujankhunt@archlinux$ kubectl -n homework-s15 exec client -- wget -qO- http://guestbook
 Welcome to my guestbook - version one
 
-zephoryx@fedora$ helm history guestbook -n homework-s15
+pujankhunt@archlinux$ helm history guestbook -n homework-s15
 REVISION	UPDATED                 	STATUS    	CHART             	APP VERSION	DESCRIPTION
 1       	Wed Oct  7 18:29:33 2026	superseded	homework-web-0.1.0	1.28       	Install complete
 2       	Wed Oct  7 18:29:38 2026	superseded	homework-web-0.1.0	1.28       	Upgrade complete
 3       	Wed Oct  7 18:29:51 2026	superseded	homework-web-0.1.0	1.28       	Upgrade complete
 4       	Wed Oct  7 18:30:04 2026	deployed  	homework-web-0.1.0	1.28       	Rollback to 1
 
-zephoryx@fedora$ helm uninstall guestbook -n homework-s15
+pujankhunt@archlinux$ helm uninstall guestbook -n homework-s15
 release "guestbook" uninstalled
 
-zephoryx@fedora$ helm list -n homework-s15
+pujankhunt@archlinux$ helm list -n homework-s15
 NAME	NAMESPACE	REVISION	UPDATED	STATUS	CHART	APP VERSION
 ```

@@ -35,7 +35,7 @@ curl -I https://example.com
 ### Commands and results
 
 ```bash
-zephoryx@fedora$ ip -brief address
+pujankhunt@archlinux$ ip -brief address
 lo               UNKNOWN        127.0.0.1/8 ::1/128
 enp62s0          DOWN
 wlp0s20f3        UP             192.168.6.199/19 fe80::a215:ee0:afc3:7587/64
@@ -49,7 +49,7 @@ veth24caf47@if2  UP             fe80::80b1:b5ff:fe07:b65b/64
 vethd1a3cc4@if2  UP             fe80::78c5:a3ff:fe13:bc65/64
 vethfc04432@if2  UP             fe80::1cd9:78ff:fe1f:6505/64
 
-zephoryx@fedora$ ip route
+pujankhunt@archlinux$ ip route
 default via 192.168.1.1 dev wlp0s20f3 proto dhcp src 192.168.6.199 metric 600
 10.0.85.2 dev outline-tun0 scope link src 10.0.85.1 linkdown
 172.17.0.0/16 dev docker0 proto kernel scope link src 172.17.0.1
@@ -57,13 +57,13 @@ default via 192.168.1.1 dev wlp0s20f3 proto dhcp src 192.168.6.199 metric 600
 192.168.0.0/19 dev wlp0s20f3 proto kernel scope link src 192.168.6.199 metric 600
 192.168.49.0/24 dev br-bd87a280590b proto kernel scope link src 192.168.49.1
 
-zephoryx@fedora$ ip neigh
+pujankhunt@archlinux$ ip neigh
 172.17.0.2 dev docker0 lladdr ba:97:c5:5d:d9:aa REACHABLE
 172.17.0.3 dev docker0 lladdr e2:f7:67:1b:ca:24 REACHABLE
 192.168.49.2 dev br-bd87a280590b lladdr 56:9d:45:53:19:0a STALE
 192.168.1.1 dev wlp0s20f3 lladdr 90:e3:ba:02:21:c6 REACHABLE
 
-zephoryx@fedora$ dig example.com
+pujankhunt@archlinux$ dig example.com
 ; <<>> DiG 9.18.50 <<>> example.com
 ;; global options: +cmd
 ;; Got answer:
@@ -74,11 +74,11 @@ zephoryx@fedora$ dig example.com
 ;; WHEN: Wed Oct 07 18:31:02 IST 2026
 ;; MSG SIZE  rcvd: 72
 
-zephoryx@fedora$ getent hosts example.com
+pujankhunt@archlinux$ getent hosts example.com
 2606:4700:10::ac42:93f3 example.com
 2606:4700:10::6814:179a example.com
 
-zephoryx@fedora$ ping -c 2 1.1.1.1
+pujankhunt@archlinux$ ping -c 2 1.1.1.1
 PING 1.1.1.1 (1.1.1.1) 56(84) bytes of data.
 64 bytes from 1.1.1.1: icmp_seq=1 ttl=57 time=44.2 ms
 64 bytes from 1.1.1.1: icmp_seq=2 ttl=57 time=60.9 ms
@@ -87,7 +87,7 @@ PING 1.1.1.1 (1.1.1.1) 56(84) bytes of data.
 2 packets transmitted, 2 received, 0% packet loss, time 1001ms
 rtt min/avg/max/mdev = 44.222/52.562/60.902/8.340 ms
 
-zephoryx@fedora$ ss -tuln
+pujankhunt@archlinux$ ss -tuln
 Netid State  Recv-Q Send-Q      Local Address:Port  Peer Address:Port
 udp   UNCONN 0      0            192.168.49.1:50572      0.0.0.0:*
 udp   UNCONN 0      0                 0.0.0.0:35298      0.0.0.0:*
@@ -103,7 +103,7 @@ tcp   LISTEN 0      50                      *:1716             *:*
 tcp   LISTEN 0      4096   [::ffff:127.0.0.1]:46421            *:*
 tcp   LISTEN 0      4096                [::1]:631           [::]:*
 
-zephoryx@fedora$ curl --head --max-time 15 https://example.com
+pujankhunt@archlinux$ curl --head --max-time 15 https://example.com
 HTTP/2 200
 date: Wed, 07 Oct 2026 13:01:03 GMT
 content-type: text/html; charset=utf-8
@@ -116,7 +116,7 @@ cf-cache-status: HIT
 cf-ray: a46d17a02f4ca901-MAA
 alt-svc: h3=":443"; ma=86400
 
-zephoryx@fedora$ ip -s link
+pujankhunt@archlinux$ ip -s link
 1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN mode DEFAULT group default qlen 1000
     link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
     RX:  bytes packets errors dropped  missed   mcast

@@ -35,43 +35,43 @@ Results from 7 October 2026. Build and diagnostic output is shortened.
 ### Commands and results
 
 ```bash
-zephoryx@fedora$ kubectl create namespace homework-s14
+pujankhunt@archlinux$ kubectl create namespace homework-s14
 namespace/homework-s14 created
 
-zephoryx@fedora$ kubectl -n homework-s14 apply -f 13-kubernetes-troubleshooting/app.yaml
+pujankhunt@archlinux$ kubectl -n homework-s14 apply -f 13-kubernetes-troubleshooting/app.yaml
 deployment.apps/troubleshooting-app created
 service/troubleshooting-service created
 
-zephoryx@fedora$ kubectl -n homework-s14 rollout status deployment/troubleshooting-app
+pujankhunt@archlinux$ kubectl -n homework-s14 rollout status deployment/troubleshooting-app
 Waiting for deployment "troubleshooting-app" rollout to finish: 0 of 2 updated replicas are available...
 Waiting for deployment "troubleshooting-app" rollout to finish: 1 of 2 updated replicas are available...
 deployment "troubleshooting-app" successfully rolled out
 
-zephoryx@fedora$ kubectl -n homework-s14 run client --image=busybox:1.37 --restart=Never -- sleep 7200
+pujankhunt@archlinux$ kubectl -n homework-s14 run client --image=busybox:1.37 --restart=Never -- sleep 7200
 pod/client created
 
-zephoryx@fedora$ kubectl -n homework-s14 wait --for=condition=Ready pod/client
+pujankhunt@archlinux$ kubectl -n homework-s14 wait --for=condition=Ready pod/client
 pod/client condition met
 
-zephoryx@fedora$ kubectl -n homework-s14 apply -f 13-kubernetes-troubleshooting/crash.yaml
+pujankhunt@archlinux$ kubectl -n homework-s14 apply -f 13-kubernetes-troubleshooting/crash.yaml
 pod/crash created
 
-zephoryx@fedora$ kubectl -n homework-s14 apply -f 13-kubernetes-troubleshooting/image.yaml
+pujankhunt@archlinux$ kubectl -n homework-s14 apply -f 13-kubernetes-troubleshooting/image.yaml
 pod/image created
 
-zephoryx@fedora$ kubectl -n homework-s14 apply -f 13-kubernetes-troubleshooting/pending.yaml
+pujankhunt@archlinux$ kubectl -n homework-s14 apply -f 13-kubernetes-troubleshooting/pending.yaml
 pod/pending created
 
-zephoryx@fedora$ kubectl -n homework-s14 apply -f 13-kubernetes-troubleshooting/creating.yaml
+pujankhunt@archlinux$ kubectl -n homework-s14 apply -f 13-kubernetes-troubleshooting/creating.yaml
 pod/creating created
 
-zephoryx@fedora$ kubectl -n homework-s14 apply -f 13-kubernetes-troubleshooting/config.yaml
+pujankhunt@archlinux$ kubectl -n homework-s14 apply -f 13-kubernetes-troubleshooting/config.yaml
 pod/config created
 
-zephoryx@fedora$ kubectl -n homework-s14 apply -f 13-kubernetes-troubleshooting/dns.yaml
+pujankhunt@archlinux$ kubectl -n homework-s14 apply -f 13-kubernetes-troubleshooting/dns.yaml
 pod/dns created
 
-zephoryx@fedora$ kubectl -n homework-s14 get pods -o wide
+pujankhunt@archlinux$ kubectl -n homework-s14 get pods -o wide
 NAME                                  READY   STATUS                       RESTARTS      AGE   IP            NODE       NOMINATED NODE   READINESS GATES
 client                                1/1     Running                      0             38s   10.244.0.68   minikube   <none>           <none>
 config                                0/1     CreateContainerConfigError   0             36s   10.244.0.71   minikube   <none>           <none>
@@ -83,7 +83,7 @@ pending                               0/1     Pending                      0    
 troubleshooting-app-98786d457-bmkvt   1/1     Running                      0             40s   10.244.0.66   minikube   <none>           <none>
 troubleshooting-app-98786d457-l9d92   1/1     Running                      0             40s   10.244.0.67   minikube   <none>           <none>
 
-zephoryx@fedora$ kubectl -n homework-s14 events
+pujankhunt@archlinux$ kubectl -n homework-s14 events
 LAST SEEN           TYPE      REASON              OBJECT                                     MESSAGE
 40s                 Normal    SuccessfulCreate    ReplicaSet/troubleshooting-app-98786d457   Created pod: troubleshooting-app-98786d457-l9d92
 40s                 Normal    SuccessfulCreate    ReplicaSet/troubleshooting-app-98786d457   Created pod: troubleshooting-app-98786d457-bmkvt
@@ -102,7 +102,7 @@ LAST SEEN           TYPE      REASON              OBJECT                        
 0s (x4 over 37s)    Normal    Created             Pod/crash                                  Container created
 0s (x4 over 37s)    Normal    Pulled              Pod/crash                                  Container image "busybox:1.37" already present on machine and can be accessed by the pod
 
-zephoryx@fedora$ kubectl -n homework-s14 explain pod.spec.containers
+pujankhunt@archlinux$ kubectl -n homework-s14 explain pod.spec.containers
 KIND:       Pod
 VERSION:    v1
 
@@ -118,11 +118,11 @@ DESCRIPTION:
     default will be used, which might be configured in the container image.
     Cannot be updated.
 
-zephoryx@fedora$ kubectl -n homework-s14 top pods
+pujankhunt@archlinux$ kubectl -n homework-s14 top pods
 error: metrics not available yet
 # Exit status: 1
 
-zephoryx@fedora$ kubectl -n homework-s14 describe pod crash
+pujankhunt@archlinux$ kubectl -n homework-s14 describe pod crash
 Name:             crash
 Namespace:        homework-s14
 Priority:         0
@@ -137,7 +137,7 @@ Service Account:  default
   Normal   Started    1s (x4 over 37s)  kubelet            spec.containers{app}: Container started
   Warning  BackOff    0s (x3 over 36s)  kubelet            spec.containers{app}: Back-off restarting failed container app in pod crash_homework-s14(a3382af5-cd81-49d6-a8c5-a15fe1f6c533)
 
-zephoryx@fedora$ kubectl -n homework-s14 describe pod image
+pujankhunt@archlinux$ kubectl -n homework-s14 describe pod image
 Name:             image
 Namespace:        homework-s14
 Priority:         0
@@ -150,7 +150,7 @@ Service Account:  default
   Normal   BackOff    4s (x2 over 35s)   kubelet            spec.containers{app}: Back-off pulling image "nginx:homework-does-not-exist"
   Warning  Failed     4s (x2 over 35s)   kubelet            spec.containers{app}: Error: ImagePullBackOff
 
-zephoryx@fedora$ kubectl -n homework-s14 describe pod pending
+pujankhunt@archlinux$ kubectl -n homework-s14 describe pod pending
 Name:             pending
 Namespace:        homework-s14
 Priority:         0
@@ -166,7 +166,7 @@ Events:
   ----     ------            ----  ----               -------
   Warning  FailedScheduling  38s   default-scheduler  0/1 nodes are available: 1 Insufficient cpu. preemption: 0/1 nodes are available: 1 Preemption is not helpful for scheduling.
 
-zephoryx@fedora$ kubectl -n homework-s14 describe pod creating
+pujankhunt@archlinux$ kubectl -n homework-s14 describe pod creating
 Name:             creating
 Namespace:        homework-s14
 Priority:         0
@@ -179,7 +179,7 @@ Service Account:  default
   Normal   Scheduled    38s               default-scheduler  Successfully assigned homework-s14/creating to minikube
   Warning  FailedMount  6s (x7 over 38s)  kubelet            MountVolume.SetUp failed for volume "missing" : secret "missing-volume" not found
 
-zephoryx@fedora$ kubectl -n homework-s14 describe pod config
+pujankhunt@archlinux$ kubectl -n homework-s14 describe pod config
 Name:             config
 Namespace:        homework-s14
 Priority:         0
@@ -192,7 +192,7 @@ Service Account:  default
   Normal   Pulled     9s (x4 over 37s)  kubelet            spec.containers{app}: Container image "busybox:1.37" already present on machine and can be accessed by the pod
   Warning  Failed     9s (x4 over 37s)  kubelet            spec.containers{app}: Error: configmap "missing-config" not found
 
-zephoryx@fedora$ kubectl -n homework-s14 describe pod dns
+pujankhunt@archlinux$ kubectl -n homework-s14 describe pod dns
 Name:             dns
 Namespace:        homework-s14
 Priority:         0
@@ -208,19 +208,19 @@ Events:
   Normal  Created    37s   kubelet            spec.containers{app}: Container created
   Normal  Started    37s   kubelet            spec.containers{app}: Container started
 
-zephoryx@fedora$ kubectl -n homework-s14 logs crash --previous
+pujankhunt@archlinux$ kubectl -n homework-s14 logs crash --previous
 unable to retrieve container logs for containerd://4a34ac61628d35caa091d6ab41fad7419c51e19fa921d7f9a07de5d000a3a8fc
 
-zephoryx@fedora$ kubectl -n homework-s14 exec dns -- nslookup kubernetes.default.svc.cluster.local
+pujankhunt@archlinux$ kubectl -n homework-s14 exec dns -- nslookup kubernetes.default.svc.cluster.local
 ;; connection timed out; no servers could be reached
 
 command terminated with exit code 1
 # Exit status: 1
 
-zephoryx@fedora$ kubectl -n homework-s14 patch svc troubleshooting-service --type=merge -p '{"spec":{"selector":{"app":"wrong-app"}}}'
+pujankhunt@archlinux$ kubectl -n homework-s14 patch svc troubleshooting-service --type=merge -p '{"spec":{"selector":{"app":"wrong-app"}}}'
 service/troubleshooting-service patched
 
-zephoryx@fedora$ kubectl -n homework-s14 get endpointslices -l kubernetes.io/service-name=troubleshooting-service -o yaml
+pujankhunt@archlinux$ kubectl -n homework-s14 get endpointslices -l kubernetes.io/service-name=troubleshooting-service -o yaml
 apiVersion: v1
 items:
 - addressType: IPv4
@@ -236,7 +236,7 @@ kind: List
 metadata:
   resourceVersion: ""
 
-zephoryx@fedora$ kubectl -n homework-s14 get pods --show-labels
+pujankhunt@archlinux$ kubectl -n homework-s14 get pods --show-labels
 NAME                                  READY   STATUS                       RESTARTS      AGE   LABELS
 client                                1/1     Running                      0             47s   run=client
 config                                0/1     CreateContainerConfigError   0             45s   <none>
@@ -248,69 +248,69 @@ pending                               0/1     Pending                      0    
 troubleshooting-app-98786d457-bmkvt   1/1     Running                      0             49s   app=troubleshooting-app,pod-template-hash=98786d457
 troubleshooting-app-98786d457-l9d92   1/1     Running                      0             49s   app=troubleshooting-app,pod-template-hash=98786d457
 
-zephoryx@fedora$ kubectl -n homework-s14 patch svc troubleshooting-service --type=merge -p '{"spec":{"selector":{"app":"troubleshooting-app"}}}'
+pujankhunt@archlinux$ kubectl -n homework-s14 patch svc troubleshooting-service --type=merge -p '{"spec":{"selector":{"app":"troubleshooting-app"}}}'
 service/troubleshooting-service patched
 
-zephoryx@fedora$ kubectl -n homework-s14 exec client -- wget -qO- http://troubleshooting-service
+pujankhunt@archlinux$ kubectl -n homework-s14 exec client -- wget -qO- http://troubleshooting-service
 <h1>Welcome to nginx!</h1>
 
-zephoryx@fedora$ kubectl -n homework-s14 create secret generic missing-volume --from-literal=demo=public-dummy
+pujankhunt@archlinux$ kubectl -n homework-s14 create secret generic missing-volume --from-literal=demo=public-dummy
 secret/missing-volume created
 
-zephoryx@fedora$ kubectl -n homework-s14 create configmap missing-config --from-literal=MODE=fixed
+pujankhunt@archlinux$ kubectl -n homework-s14 create configmap missing-config --from-literal=MODE=fixed
 configmap/missing-config created
 
-zephoryx@fedora$ kubectl -n homework-s14 wait --for=condition=Ready pod/creating pod/config
+pujankhunt@archlinux$ kubectl -n homework-s14 wait --for=condition=Ready pod/creating pod/config
 pod/creating condition met
 pod/config condition met
 
-zephoryx@fedora$ kubectl -n homework-s14 delete pod crash
+pujankhunt@archlinux$ kubectl -n homework-s14 delete pod crash
 pod "crash" deleted from homework-s14 namespace
 
-zephoryx@fedora$ kubectl -n homework-s14 run crash --image=busybox:1.37 --restart=Never -- sleep 3600
+pujankhunt@archlinux$ kubectl -n homework-s14 run crash --image=busybox:1.37 --restart=Never -- sleep 3600
 pod/crash created
 
-zephoryx@fedora$ kubectl -n homework-s14 wait --for=condition=Ready pod/crash
+pujankhunt@archlinux$ kubectl -n homework-s14 wait --for=condition=Ready pod/crash
 pod/crash condition met
 
-zephoryx@fedora$ kubectl -n homework-s14 delete pod image
+pujankhunt@archlinux$ kubectl -n homework-s14 delete pod image
 pod "image" deleted from homework-s14 namespace
 
-zephoryx@fedora$ kubectl -n homework-s14 run image --image=busybox:1.37 --restart=Never -- sleep 3600
+pujankhunt@archlinux$ kubectl -n homework-s14 run image --image=busybox:1.37 --restart=Never -- sleep 3600
 pod/image created
 
-zephoryx@fedora$ kubectl -n homework-s14 wait --for=condition=Ready pod/image
+pujankhunt@archlinux$ kubectl -n homework-s14 wait --for=condition=Ready pod/image
 pod/image condition met
 
-zephoryx@fedora$ kubectl -n homework-s14 delete pod pending
+pujankhunt@archlinux$ kubectl -n homework-s14 delete pod pending
 pod "pending" deleted from homework-s14 namespace
 
-zephoryx@fedora$ kubectl -n homework-s14 run pending --image=busybox:1.37 --restart=Never -- sleep 3600
+pujankhunt@archlinux$ kubectl -n homework-s14 run pending --image=busybox:1.37 --restart=Never -- sleep 3600
 pod/pending created
 
-zephoryx@fedora$ kubectl -n homework-s14 wait --for=condition=Ready pod/pending
+pujankhunt@archlinux$ kubectl -n homework-s14 wait --for=condition=Ready pod/pending
 pod/pending condition met
 
-zephoryx@fedora$ kubectl -n homework-s14 delete pod dns
+pujankhunt@archlinux$ kubectl -n homework-s14 delete pod dns
 pod "dns" deleted from homework-s14 namespace
 
-zephoryx@fedora$ kubectl -n homework-s14 run dns --image=busybox:1.37 --restart=Never -- sleep 3600
+pujankhunt@archlinux$ kubectl -n homework-s14 run dns --image=busybox:1.37 --restart=Never -- sleep 3600
 pod/dns created
 
-zephoryx@fedora$ kubectl -n homework-s14 wait --for=condition=Ready pod/dns
+pujankhunt@archlinux$ kubectl -n homework-s14 wait --for=condition=Ready pod/dns
 pod/dns condition met
 
-zephoryx@fedora$ kubectl -n homework-s14 exec dns -- nslookup kubernetes.default.svc.cluster.local
+pujankhunt@archlinux$ kubectl -n homework-s14 exec dns -- nslookup kubernetes.default.svc.cluster.local
 Server:		10.96.0.10
 Address:	10.96.0.10:53
 
 Name:	kubernetes.default.svc.cluster.local
 Address: 10.96.0.1
 
-zephoryx@fedora$ kubectl -n homework-s14 exec client -- wget -qO- http://troubleshooting-service
+pujankhunt@archlinux$ kubectl -n homework-s14 exec client -- wget -qO- http://troubleshooting-service
 <h1>Welcome to nginx!</h1>
 
-zephoryx@fedora$ kubectl -n homework-s14 get pods,deploy,rs,svc -o wide
+pujankhunt@archlinux$ kubectl -n homework-s14 get pods,deploy,rs,svc -o wide
 NAME                                      READY   STATUS    RESTARTS   AGE    IP            NODE       NOMINATED NODE   READINESS GATES
 pod/client                                1/1     Running   0          107s   10.244.0.68   minikube   <none>           <none>
 pod/config                                1/1     Running   0          105s   10.244.0.71   minikube   <none>           <none>

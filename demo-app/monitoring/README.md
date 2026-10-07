@@ -20,7 +20,7 @@ References: [Prometheus](https://prometheus.io/docs/introduction/overview/), [Gr
 The same stack also ran on the real AKS cluster. The recorded cloud queries below show Prometheus and TaskBoard scrape targets up, a process-memory sample and no active unavailable alert. The hosted Azure deployment log includes ready monitoring Deployments and real `kubectl top` measurements. The lab stack uses one backend Service scrape target; a production deployment should discover and scrape individual replicas.
 
 ```bash
-zephoryx@fedora$ curl http://localhost:19091/api/v1/targets
+pujankhunt@archlinux$ curl http://localhost:19091/api/v1/targets
 {
   "status": "success",
   "targets": [
@@ -37,7 +37,7 @@ zephoryx@fedora$ curl http://localhost:19091/api/v1/targets
   ]
 }
 
-zephoryx@fedora$ curl http://localhost:19091/api/v1/alerts
+pujankhunt@archlinux$ curl http://localhost:19091/api/v1/alerts
 {
   "status": "success",
   "data": {
@@ -45,7 +45,7 @@ zephoryx@fedora$ curl http://localhost:19091/api/v1/alerts
   }
 }
 
-zephoryx@fedora$ curl http://localhost:19091/api/v1/query?query=up
+pujankhunt@archlinux$ curl http://localhost:19091/api/v1/query?query=up
 {
   "status": "success",
   "data": {
@@ -56,7 +56,7 @@ zephoryx@fedora$ curl http://localhost:19091/api/v1/query?query=up
   }
 }
 
-zephoryx@fedora$ curl http://localhost:19091/api/v1/query?query=process_resident_memory_bytes
+pujankhunt@archlinux$ curl http://localhost:19091/api/v1/query?query=process_resident_memory_bytes
 {
   "status": "success",
   "data": {

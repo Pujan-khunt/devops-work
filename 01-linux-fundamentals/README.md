@@ -62,7 +62,7 @@ printenv PATH
 ### Links, users and command practice
 
 ```bash
-zephoryx@fedora$ python3 scripts/run_basics.py 1
+pujankhunt@archlinux$ python3 scripts/run_basics.py 1
 6830343 -rw-r--r--. 2 root root 14 Oct  7 13:00 hard
 6830343 -rw-r--r--. 2 root root 14 Oct  7 13:00 original
 6830344 lrwxrwxrwx. 1 root root  8 Oct  7 13:00 soft -> original
@@ -78,21 +78,21 @@ notes.txt
 ### Service journal and boot history
 
 ```bash
-zephoryx@fedora$ journalctl -u docker.service -n 12 --no-pager
-Oct 07 18:30:10 fedora dockerd[1401]: time="2026-10-07T18:30:10.379702812+05:30" level=info msg="detected 127.0.0.53 nameserver, assuming systemd-resolved, so using resolv.conf: /run/systemd/resolve/resolv.conf"
-Oct 07 18:30:10 fedora dockerd[1401]: time="2026-10-07T18:30:10.771282617+05:30" level=info msg="sbJoin: gwep4 ''->'c30de969a938', gwep6 ''->''"
-Oct 07 18:30:13 fedora dockerd[1401]: time="2026-10-07T18:30:13.271590705+05:30" level=warning msg="healthcheck failed" actualDuration="878.065µs" error="Unavailable: connection error: desc = \"transport: Error while dialing: only one connection allowed\"" timeout=15s
-Oct 07 18:30:14 fedora dockerd[1401]: time="2026-10-07T18:30:14.852218879+05:30" level=info msg="detected 127.0.0.53 nameserver, assuming systemd-resolved, so using resolv.conf: /run/systemd/resolve/resolv.conf"
-Oct 07 18:30:15 fedora dockerd[1401]: time="2026-10-07T18:30:15.278688201+05:30" level=info msg="sbJoin: gwep4 ''->'88251fd03f6a', gwep6 ''->''"
-Oct 07 18:30:18 fedora dockerd[1401]: time="2026-10-07T18:30:18.271198589+05:30" level=error msg="healthcheck failed fatally" error="session healthcheck failed fatally: Unavailable: connection error: desc = \"transport: Error while dialing: only one connection allowed\""
-Oct 07 18:30:26 fedora dockerd[1401]: time="2026-10-07T18:30:26.009441464+05:30" level=info msg="sbJoin: gwep4 ''->'dacdb3b556b6', gwep6 ''->''" eid=dacdb3b556b6 ep=homework-hello-nodejs net=bridge nid=d6199b27e911
-Oct 07 18:30:27 fedora dockerd[1401]: time="2026-10-07T18:30:27.505783025+05:30" level=info msg="image pulled" digest="sha256:534baea6a22c03a63003dbc8dbe78fe34bc0d7e595d9a9dc9834884ff530eb55" remote="docker.io/library/ubuntu:24.04"
-Oct 07 18:30:28 fedora dockerd[1401]: time="2026-10-07T18:30:28.323743146+05:30" level=warning msg="healthcheck failed" actualDuration="717.036µs" error="Unavailable: connection error: desc = \"transport: Error while dialing: only one connection allowed\"" timeout=15s
-Oct 07 18:30:28 fedora dockerd[1401]: time="2026-10-07T18:30:28.805864108+05:30" level=info msg="sbJoin: gwep4 ''->'9efd7a65b575', gwep6 ''->''" eid=9efd7a65b575 ep=dazzling_varahamihira net=bridge nid=d6199b27e911
-Oct 07 18:30:33 fedora dockerd[1401]: time="2026-10-07T18:30:33.324512273+05:30" level=error msg="healthcheck failed fatally" error="session healthcheck failed fatally: Unavailable: connection error: desc = \"transport: Error while dialing: only one connection allowed\""
-Oct 07 18:30:54 fedora dockerd[1401]: time="2026-10-07T18:30:54.072691846+05:30" level=info msg="received task-delete event from containerd" container=c66dcd8517ca8f1b4dce66250e1ff1239c624dc14f2dbbeefeab1df24a77ddaf module=libcontainerd namespace=moby topic=/tasks/delete type="*events.TaskDelete"
+pujankhunt@archlinux$ journalctl -u docker.service -n 12 --no-pager
+Oct 07 18:30:10 archlinux dockerd[1401]: time="2026-10-07T18:30:10.379702812+05:30" level=info msg="detected 127.0.0.53 nameserver, assuming systemd-resolved, so using resolv.conf: /run/systemd/resolve/resolv.conf"
+Oct 07 18:30:10 archlinux dockerd[1401]: time="2026-10-07T18:30:10.771282617+05:30" level=info msg="sbJoin: gwep4 ''->'c30de969a938', gwep6 ''->''"
+Oct 07 18:30:13 archlinux dockerd[1401]: time="2026-10-07T18:30:13.271590705+05:30" level=warning msg="healthcheck failed" actualDuration="878.065µs" error="Unavailable: connection error: desc = \"transport: Error while dialing: only one connection allowed\"" timeout=15s
+Oct 07 18:30:14 archlinux dockerd[1401]: time="2026-10-07T18:30:14.852218879+05:30" level=info msg="detected 127.0.0.53 nameserver, assuming systemd-resolved, so using resolv.conf: /run/systemd/resolve/resolv.conf"
+Oct 07 18:30:15 archlinux dockerd[1401]: time="2026-10-07T18:30:15.278688201+05:30" level=info msg="sbJoin: gwep4 ''->'88251fd03f6a', gwep6 ''->''"
+Oct 07 18:30:18 archlinux dockerd[1401]: time="2026-10-07T18:30:18.271198589+05:30" level=error msg="healthcheck failed fatally" error="session healthcheck failed fatally: Unavailable: connection error: desc = \"transport: Error while dialing: only one connection allowed\""
+Oct 07 18:30:26 archlinux dockerd[1401]: time="2026-10-07T18:30:26.009441464+05:30" level=info msg="sbJoin: gwep4 ''->'dacdb3b556b6', gwep6 ''->''" eid=dacdb3b556b6 ep=homework-hello-nodejs net=bridge nid=d6199b27e911
+Oct 07 18:30:27 archlinux dockerd[1401]: time="2026-10-07T18:30:27.505783025+05:30" level=info msg="image pulled" digest="sha256:534baea6a22c03a63003dbc8dbe78fe34bc0d7e595d9a9dc9834884ff530eb55" remote="docker.io/library/ubuntu:24.04"
+Oct 07 18:30:28 archlinux dockerd[1401]: time="2026-10-07T18:30:28.323743146+05:30" level=warning msg="healthcheck failed" actualDuration="717.036µs" error="Unavailable: connection error: desc = \"transport: Error while dialing: only one connection allowed\"" timeout=15s
+Oct 07 18:30:28 archlinux dockerd[1401]: time="2026-10-07T18:30:28.805864108+05:30" level=info msg="sbJoin: gwep4 ''->'9efd7a65b575', gwep6 ''->''" eid=9efd7a65b575 ep=dazzling_varahamihira net=bridge nid=d6199b27e911
+Oct 07 18:30:33 archlinux dockerd[1401]: time="2026-10-07T18:30:33.324512273+05:30" level=error msg="healthcheck failed fatally" error="session healthcheck failed fatally: Unavailable: connection error: desc = \"transport: Error while dialing: only one connection allowed\""
+Oct 07 18:30:54 archlinux dockerd[1401]: time="2026-10-07T18:30:54.072691846+05:30" level=info msg="received task-delete event from containerd" container=c66dcd8517ca8f1b4dce66250e1ff1239c624dc14f2dbbeefeab1df24a77ddaf module=libcontainerd namespace=moby topic=/tasks/delete type="*events.TaskDelete"
 
-zephoryx@fedora$ journalctl --list-boots --no-pager
+pujankhunt@archlinux$ journalctl --list-boots --no-pager
 IDX BOOT ID                          FIRST ENTRY                 LAST ENTRY
  -5 d55eaacaefd84253a2d24c5f82514b5a Sun 2026-10-04 17:25:12 IST Sun 2026-10-04 17:27:39 IST
  -4 4105fd8123e84602b1512df120be6006 Sun 2026-10-04 22:57:53 IST Mon 2026-10-05 14:16:31 IST

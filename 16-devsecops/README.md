@@ -15,7 +15,7 @@ The first image scans found vulnerable runtime packages. I updated those package
 
 - [Workflow](../.github/workflows/devops.yml)
 - [Security checks and results](../demo-app/security/README.md)
-- [Successful CI run](https://github.com/ThereIsSomething/devops-work/actions/runs/37630785578)
-- [Successful Azure deployment](https://github.com/ThereIsSomething/devops-work/actions/runs/37631537431)
+- [Successful CI run](https://github.com/Pujan-khunt/devops-work/actions/runs/37630785578)
+- [Successful Azure deployment](https://github.com/Pujan-khunt/devops-work/actions/runs/37631537431)
 
 The Azure workflow uses OIDC and deploys the exact image SHA from a successful CI run. It checks application health, database readiness and the Ingress route.

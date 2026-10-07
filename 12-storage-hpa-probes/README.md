@@ -32,23 +32,23 @@ Results from 7 October 2026. Build and diagnostic output is shortened.
 ### Commands and results
 
 ```bash
-zephoryx@fedora$ kubectl create namespace homework-s13
+pujankhunt@archlinux$ kubectl create namespace homework-s13
 namespace/homework-s13 created
 
-zephoryx@fedora$ kubectl -n homework-s13 apply -f 12-storage-hpa-probes/app.yaml
+pujankhunt@archlinux$ kubectl -n homework-s13 apply -f 12-storage-hpa-probes/app.yaml
 persistentvolumeclaim/web-data created
 deployment.apps/web-app created
 service/web created
 
-zephoryx@fedora$ kubectl -n homework-s13 rollout status deployment/web-app
+pujankhunt@archlinux$ kubectl -n homework-s13 rollout status deployment/web-app
 Waiting for deployment "web-app" rollout to finish: 0 of 2 updated replicas are available...
 Waiting for deployment "web-app" rollout to finish: 1 of 2 updated replicas are available...
 deployment "web-app" successfully rolled out
 
-zephoryx@fedora$ kubectl -n homework-s13 apply -f 12-storage-hpa-probes/hpa.yml
+pujankhunt@archlinux$ kubectl -n homework-s13 apply -f 12-storage-hpa-probes/hpa.yml
 horizontalpodautoscaler.autoscaling/web-app created
 
-zephoryx@fedora$ kubectl -n homework-s13 get pvc,pv,sc
+pujankhunt@archlinux$ kubectl -n homework-s13 get pvc,pv,sc
 NAME                             STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
 persistentvolumeclaim/web-data   Bound    pvc-63a5ae6b-2242-473e-aa5b-8a9a06c72912   500Mi      RWO            standard       <unset>                 7s
 
@@ -60,16 +60,16 @@ persistentvolume/student-pv                                 1Gi        RWO      
 NAME                                             PROVISIONER                RECLAIMPOLICY   VOLUMEBINDINGMODE   ALLOWVOLUMEEXPANSION   AGE
 storageclass.storage.k8s.io/standard (default)   k8s.io/minikube-hostpath   Delete          Immediate           false                  29d
 
-zephoryx@fedora$ kubectl -n homework-s13 run client --image=busybox:1.37 --restart=Never -- sleep 7200
+pujankhunt@archlinux$ kubectl -n homework-s13 run client --image=busybox:1.37 --restart=Never -- sleep 7200
 pod/client created
 
-zephoryx@fedora$ kubectl -n homework-s13 wait --for=condition=Ready pod/client
+pujankhunt@archlinux$ kubectl -n homework-s13 wait --for=condition=Ready pod/client
 pod/client condition met
 
-zephoryx@fedora$ kubectl -n homework-s13 exec client -- wget -qO- http://web
+pujankhunt@archlinux$ kubectl -n homework-s13 exec client -- wget -qO- http://web
 <h1>Welcome to nginx!</h1>
 
-zephoryx@fedora$ kubectl -n homework-s13 get pods -l app=web-app -o json
+pujankhunt@archlinux$ kubectl -n homework-s13 get pods -l app=web-app -o json
 {
     "apiVersion": "v1",
     "items": [
@@ -85,17 +85,17 @@ zephoryx@fedora$ kubectl -n homework-s13 get pods -l app=web-app -o json
     }
 }
 
-zephoryx@fedora$ kubectl -n homework-s13 exec web-app-85c8fd8f57-kmq72 -- sh -c 'echo persistent-homework-data > /data/student.txt; echo ephemeral-data > /scratch/transient.txt; cat /data/student.txt'
+pujankhunt@archlinux$ kubectl -n homework-s13 exec web-app-85c8fd8f57-kmq72 -- sh -c 'echo persistent-homework-data > /data/student.txt; echo ephemeral-data > /scratch/transient.txt; cat /data/student.txt'
 persistent-homework-data
 
-zephoryx@fedora$ kubectl -n homework-s13 delete pod web-app-85c8fd8f57-kmq72
+pujankhunt@archlinux$ kubectl -n homework-s13 delete pod web-app-85c8fd8f57-kmq72
 pod "web-app-85c8fd8f57-kmq72" deleted from homework-s13 namespace
 
-zephoryx@fedora$ kubectl -n homework-s13 rollout status deployment/web-app
+pujankhunt@archlinux$ kubectl -n homework-s13 rollout status deployment/web-app
 Waiting for deployment "web-app" rollout to finish: 1 of 2 updated replicas are available...
 deployment "web-app" successfully rolled out
 
-zephoryx@fedora$ kubectl -n homework-s13 get pods -l app=web-app -o json
+pujankhunt@archlinux$ kubectl -n homework-s13 get pods -l app=web-app -o json
 {
     "apiVersion": "v1",
     "items": [
@@ -111,93 +111,93 @@ zephoryx@fedora$ kubectl -n homework-s13 get pods -l app=web-app -o json
     }
 }
 
-zephoryx@fedora$ kubectl -n homework-s13 exec web-app-85c8fd8f57-rx84t -- cat /data/student.txt
+pujankhunt@archlinux$ kubectl -n homework-s13 exec web-app-85c8fd8f57-rx84t -- cat /data/student.txt
 persistent-homework-data
 
-zephoryx@fedora$ kubectl -n homework-s13 get hpa
+pujankhunt@archlinux$ kubectl -n homework-s13 get hpa
 NAME      REFERENCE            TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
 web-app   Deployment/web-app   cpu: <unknown>/50%   2         5         2          11s
 
-zephoryx@fedora$ kubectl -n homework-s13 top pods
+pujankhunt@archlinux$ kubectl -n homework-s13 top pods
 error: metrics not available yet
 # Exit status: 1
 
-zephoryx@fedora$ kubectl -n homework-s13 apply -f 12-storage-hpa-probes/load-generator.yaml
+pujankhunt@archlinux$ kubectl -n homework-s13 apply -f 12-storage-hpa-probes/load-generator.yaml
 pod/load-generator created
 CPU workload: bounded 150-second busy loop in each application Pod; HTTP load-generator also running.
 
-zephoryx@fedora$ kubectl -n homework-s13 get hpa
+pujankhunt@archlinux$ kubectl -n homework-s13 get hpa
 NAME      REFERENCE            TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
 web-app   Deployment/web-app   cpu: <unknown>/50%   2         5         2          32s
 
-zephoryx@fedora$ kubectl -n homework-s13 top pods
+pujankhunt@archlinux$ kubectl -n homework-s13 top pods
 NAME                       CPU(cores)   MEMORY(bytes)
 client                     9m           0Mi
 web-app-85c8fd8f57-rx84t   121m         10Mi
 web-app-85c8fd8f57-wbk47   58m          11Mi
 
-zephoryx@fedora$ kubectl -n homework-s13 get pods
+pujankhunt@archlinux$ kubectl -n homework-s13 get pods
 NAME                       READY   STATUS    RESTARTS   AGE
 client                     1/1     Running   0          31s
 load-generator             1/1     Running   0          21s
 web-app-85c8fd8f57-rx84t   1/1     Running   0          28s
 web-app-85c8fd8f57-wbk47   1/1     Running   0          38s
 
-zephoryx@fedora$ kubectl -n homework-s13 get deployment web-app -o 'jsonpath={.spec.replicas}'
+pujankhunt@archlinux$ kubectl -n homework-s13 get deployment web-app -o 'jsonpath={.spec.replicas}'
 2
 
-zephoryx@fedora$ kubectl -n homework-s13 get hpa
+pujankhunt@archlinux$ kubectl -n homework-s13 get hpa
 NAME      REFERENCE            TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
 web-app   Deployment/web-app   cpu: <unknown>/50%   2         5         2          53s
 
-zephoryx@fedora$ kubectl -n homework-s13 top pods
+pujankhunt@archlinux$ kubectl -n homework-s13 top pods
 NAME                       CPU(cores)   MEMORY(bytes)
 client                     9m           0Mi
 web-app-85c8fd8f57-rx84t   121m         10Mi
 web-app-85c8fd8f57-wbk47   58m          11Mi
 
-zephoryx@fedora$ kubectl -n homework-s13 get pods
+pujankhunt@archlinux$ kubectl -n homework-s13 get pods
 NAME                       READY   STATUS    RESTARTS   AGE
 client                     1/1     Running   0          53s
 load-generator             1/1     Running   0          43s
 web-app-85c8fd8f57-rx84t   1/1     Running   0          50s
 web-app-85c8fd8f57-wbk47   1/1     Running   0          60s
 
-zephoryx@fedora$ kubectl -n homework-s13 get deployment web-app -o 'jsonpath={.spec.replicas}'
+pujankhunt@archlinux$ kubectl -n homework-s13 get deployment web-app -o 'jsonpath={.spec.replicas}'
 2
 
-zephoryx@fedora$ kubectl -n homework-s13 get hpa
+pujankhunt@archlinux$ kubectl -n homework-s13 get hpa
 NAME      REFERENCE            TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
 web-app   Deployment/web-app   cpu: <unknown>/50%   2         5         2          75s
 
-zephoryx@fedora$ kubectl -n homework-s13 top pods
+pujankhunt@archlinux$ kubectl -n homework-s13 top pods
 NAME                       CPU(cores)   MEMORY(bytes)
 client                     9m           0Mi
 web-app-85c8fd8f57-rx84t   121m         10Mi
 web-app-85c8fd8f57-wbk47   58m          11Mi
 
-zephoryx@fedora$ kubectl -n homework-s13 get pods
+pujankhunt@archlinux$ kubectl -n homework-s13 get pods
 NAME                       READY   STATUS    RESTARTS   AGE
 client                     1/1     Running   0          74s
 load-generator             1/1     Running   0          64s
 web-app-85c8fd8f57-rx84t   1/1     Running   0          71s
 web-app-85c8fd8f57-wbk47   1/1     Running   0          81s
 
-zephoryx@fedora$ kubectl -n homework-s13 get deployment web-app -o 'jsonpath={.spec.replicas}'
+pujankhunt@archlinux$ kubectl -n homework-s13 get deployment web-app -o 'jsonpath={.spec.replicas}'
 2
 
-zephoryx@fedora$ kubectl -n homework-s13 get hpa
+pujankhunt@archlinux$ kubectl -n homework-s13 get hpa
 NAME      REFERENCE            TARGETS          MINPODS   MAXPODS   REPLICAS   AGE
 web-app   Deployment/web-app   cpu: 1000%/50%   2         5         2          96s
 
-zephoryx@fedora$ kubectl -n homework-s13 top pods
+pujankhunt@archlinux$ kubectl -n homework-s13 top pods
 NAME                       CPU(cores)   MEMORY(bytes)
 client                     0m           0Mi
 load-generator             339m         3Mi
 web-app-85c8fd8f57-rx84t   250m         11Mi
 web-app-85c8fd8f57-wbk47   250m         10Mi
 
-zephoryx@fedora$ kubectl -n homework-s13 get pods
+pujankhunt@archlinux$ kubectl -n homework-s13 get pods
 NAME                       READY   STATUS    RESTARTS   AGE
 client                     1/1     Running   0          95s
 load-generator             1/1     Running   0          85s
@@ -207,13 +207,13 @@ web-app-85c8fd8f57-rr27z   0/1     Running   0          5s
 web-app-85c8fd8f57-rx84t   1/1     Running   0          92s
 web-app-85c8fd8f57-wbk47   1/1     Running   0          102s
 
-zephoryx@fedora$ kubectl -n homework-s13 get deployment web-app -o 'jsonpath={.spec.replicas}'
+pujankhunt@archlinux$ kubectl -n homework-s13 get deployment web-app -o 'jsonpath={.spec.replicas}'
 5
 
-zephoryx@fedora$ kubectl -n homework-s13 delete pod load-generator
+pujankhunt@archlinux$ kubectl -n homework-s13 delete pod load-generator
 pod "load-generator" deleted from homework-s13 namespace
 
-zephoryx@fedora$ kubectl -n homework-s13 describe hpa
+pujankhunt@archlinux$ kubectl -n homework-s13 describe hpa
 Name:                                                  web-app
 Namespace:                                             homework-s13
 Labels:                                                <none>
@@ -229,7 +229,7 @@ Reference:                                             Deployment/web-app
   Warning  FailedComputeMetricsReplicas  118s (x4 over 2m43s)   horizontal-pod-autoscaler  invalid metrics (1 invalid out of 1), first error is: failed to get cpu resource metric value: failed to get cpu utilization: did not receive metrics for targeted pods (pods might be unready)
   Normal   SuccessfulRescale             103s                   horizontal-pod-autoscaler  New size: 5; reason: cpu resource utilization (percentage of request) above target
 
-zephoryx@fedora$ kubectl -n homework-s13 get pods -o wide
+pujankhunt@archlinux$ kubectl -n homework-s13 get pods -o wide
 NAME                       READY   STATUS    RESTARTS   AGE     IP            NODE       NOMINATED NODE   READINESS GATES
 client                     1/1     Running   0          3m14s   10.244.0.59   minikube   <none>           <none>
 web-app-85c8fd8f57-757kh   1/1     Running   0          104s    10.244.0.63   minikube   <none>           <none>

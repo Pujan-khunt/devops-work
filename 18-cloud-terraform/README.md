@@ -55,16 +55,16 @@ The command blocks below show provisioning, HTTP verification and cleanup. The A
 ### Cloud infrastructure and HTTP verification
 
 ```bash
-zephoryx@fedora$ az group create --name rg-devops-homework --location centralindia --tags purpose=devops-homework --query '{name:name,location:location,provisioningState:properties.provisioningState}' -o json
+pujankhunt@archlinux$ az group create --name rg-devops-homework --location centralindia --tags purpose=devops-homework --query '{name:name,location:location,provisioningState:properties.provisioningState}' -o json
 {
   "location": "centralindia",
   "name": "rg-devops-homework",
   "provisioningState": "Succeeded"
 }
 
-zephoryx@fedora$ cd 18-cloud-terraform/azure-alternative
+pujankhunt@archlinux$ cd 18-cloud-terraform/azure-alternative
 
-zephoryx@fedora$ terraform init
+pujankhunt@archlinux$ terraform init
 Initializing the backend...
 
 Initializing provider plugins...
@@ -73,12 +73,12 @@ Initializing provider plugins...
 
 Terraform has been successfully initialized!
 
-zephoryx@fedora$ terraform fmt -check
+pujankhunt@archlinux$ terraform fmt -check
 
-zephoryx@fedora$ terraform validate
+pujankhunt@archlinux$ terraform validate
 Success! The configuration is valid.
 
-zephoryx@fedora$ terraform plan -out=lab.tfplan
+pujankhunt@archlinux$ terraform plan -out=lab.tfplan
 data.azurerm_resource_group.lab: Reading...
 data.azurerm_resource_group.lab: Read complete after 2s [id=/subscriptions/<subscription-id>/resourceGroups/rg-devops-homework]
 
@@ -91,11 +91,11 @@ Plan: 9 to add, 0 to change, 0 to destroy.
 
 Changes to Outputs:
   + resource_group  = "rg-devops-homework"
-  + storage_account = "nitishhw1791379309"
+  + storage_account = "pujanhw1791379309"
   + vnet_id         = (known after apply)
   + web_url         = (known after apply)
 
-zephoryx@fedora$ terraform apply lab.tfplan
+pujankhunt@archlinux$ terraform apply lab.tfplan
 azurerm_network_security_group.app: Creating...
 azurerm_virtual_network.lab: Creating...
 azurerm_public_ip.web[0]: Creating...
@@ -110,14 +110,14 @@ Error: creating Linux Virtual Machine (Subscription: "<subscription-id>"
 
 # Exit status: 1
 
-zephoryx@fedora$ az group create --name rg-devops-homework --location centralindia --tags purpose=devops-homework --query '{name:name,location:location,provisioningState:properties.provisioningState}' -o json
+pujankhunt@archlinux$ az group create --name rg-devops-homework --location centralindia --tags purpose=devops-homework --query '{name:name,location:location,provisioningState:properties.provisioningState}' -o json
 {
   "location": "centralindia",
   "name": "rg-devops-homework",
   "provisioningState": "Succeeded"
 }
 
-zephoryx@fedora$ terraform init
+pujankhunt@archlinux$ terraform init
 Initializing the backend...
 
 Initializing provider plugins...
@@ -126,18 +126,18 @@ Initializing provider plugins...
 
 Terraform has been successfully initialized!
 
-zephoryx@fedora$ terraform fmt -check
+pujankhunt@archlinux$ terraform fmt -check
 
-zephoryx@fedora$ terraform validate
+pujankhunt@archlinux$ terraform validate
 Success! The configuration is valid.
 
-zephoryx@fedora$ terraform plan -out=lab.tfplan
+pujankhunt@archlinux$ terraform plan -out=lab.tfplan
 data.azurerm_resource_group.lab: Reading...
 data.azurerm_resource_group.lab: Read complete after 0s [id=/subscriptions/<subscription-id>/resourceGroups/rg-devops-homework]
 azurerm_network_security_group.app: Refreshing state... [id=/subscriptions/<subscription-id>/resourceGroups/rg-devops-homework/providers/Microsoft.Network/networkSecurityGroups/nsg-devops-homework]
 azurerm_virtual_network.lab: Refreshing state... [id=/subscriptions/<subscription-id>/resourceGroups/rg-devops-homework/providers/Microsoft.Network/virtualNetworks/vnet-devops-homework]
 azurerm_public_ip.web[0]: Refreshing state... [id=/subscriptions/<subscription-id>/resourceGroups/rg-devops-homework/providers/Microsoft.Network/publicIPAddresses/pip-devops-homework]
-azurerm_storage_account.lab: Refreshing state... [id=/subscriptions/<subscription-id>/resourceGroups/rg-devops-homework/providers/Microsoft.Storage/storageAccounts/nitishhw1791379309]
+azurerm_storage_account.lab: Refreshing state... [id=/subscriptions/<subscription-id>/resourceGroups/rg-devops-homework/providers/Microsoft.Storage/storageAccounts/pujanhw1791379309]
 # ... intermediate output omitted ...
       ~ static_website (known after apply)
     }
@@ -145,10 +145,10 @@ azurerm_storage_account.lab: Refreshing state... [id=/subscriptions/<subscriptio
 Plan: 2 to add, 0 to change, 1 to destroy.
 
 Changes to Outputs:
-  ~ storage_account = "nitishhw1791379309" -> "nitishhw1791379436"
+  ~ storage_account = "pujanhw1791379309" -> "pujanhw1791379436"
 
-zephoryx@fedora$ terraform apply lab.tfplan
-azurerm_storage_account.lab: Destroying... [id=/subscriptions/<subscription-id>/resourceGroups/rg-devops-homework/providers/Microsoft.Storage/storageAccounts/nitishhw1791379309]
+pujankhunt@archlinux$ terraform apply lab.tfplan
+azurerm_storage_account.lab: Destroying... [id=/subscriptions/<subscription-id>/resourceGroups/rg-devops-homework/providers/Microsoft.Storage/storageAccounts/pujanhw1791379309]
 azurerm_linux_virtual_machine.web[0]: Creating...
 azurerm_storage_account.lab: Destruction complete after 3s
 azurerm_storage_account.lab: Creating...
@@ -161,11 +161,11 @@ Apply complete! Resources: 2 added, 0 changed, 1 destroyed.
 Outputs:
 
 resource_group = "rg-devops-homework"
-storage_account = "nitishhw1791379436"
+storage_account = "pujanhw1791379436"
 vnet_id = "/subscriptions/<subscription-id>/resourceGroups/rg-devops-homework/providers/Microsoft.Network/virtualNetworks/vnet-devops-homework"
 web_url = "http://20.198.116.200"
 
-zephoryx@fedora$ terraform show
+pujankhunt@archlinux$ terraform show
 # data.azurerm_resource_group.lab:
 data "azurerm_resource_group" "lab" {
     id         = "/subscriptions/<subscription-id>/resourceGroups/rg-devops-homework"
@@ -177,26 +177,26 @@ data "azurerm_resource_group" "lab" {
 Outputs:
 
 resource_group = "rg-devops-homework"
-storage_account = "nitishhw1791379436"
+storage_account = "pujanhw1791379436"
 vnet_id = "/subscriptions/<subscription-id>/resourceGroups/rg-devops-homework/providers/Microsoft.Network/virtualNetworks/vnet-devops-homework"
 web_url = "http://20.198.116.200"
 
-zephoryx@fedora$ terraform output
+pujankhunt@archlinux$ terraform output
 resource_group = "rg-devops-homework"
-storage_account = "nitishhw1791379436"
+storage_account = "pujanhw1791379436"
 vnet_id = "/subscriptions/<subscription-id>/resourceGroups/rg-devops-homework/providers/Microsoft.Network/virtualNetworks/vnet-devops-homework"
 web_url = "http://20.198.116.200"
 
-zephoryx@fedora$ curl -f http://20.198.116.200
+pujankhunt@archlinux$ curl -f http://20.198.116.200
 Hello World from Terraform on Azure
 ```
 
 ### Infrastructure cleanup
 
 ```bash
-zephoryx@fedora$ cd 18-cloud-terraform/azure-alternative
+pujankhunt@archlinux$ cd 18-cloud-terraform/azure-alternative
 
-zephoryx@fedora$ terraform destroy -auto-approve
+pujankhunt@archlinux$ terraform destroy -auto-approve
 data.azurerm_resource_group.lab: Reading...
 data.azurerm_resource_group.lab: Read complete after 0s [id=/subscriptions/<subscription-id>/resourceGroups/rg-devops-homework]
 azurerm_public_ip.web[0]: Refreshing state... [id=/subscriptions/<subscription-id>/resourceGroups/rg-devops-homework/providers/Microsoft.Network/publicIPAddresses/pip-devops-homework]
@@ -209,5 +209,5 @@ azurerm_virtual_network.lab: Destruction complete after 11s
 
 Destroy complete! Resources: 9 destroyed.
 
-zephoryx@fedora$ terraform state list
+pujankhunt@archlinux$ terraform state list
 ```

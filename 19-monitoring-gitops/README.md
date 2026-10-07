@@ -34,22 +34,22 @@ The monitoring stack was also deployed on Azure AKS. [Cloud metrics and target h
 ### Repairing manual replica drift
 
 ```bash
-zephoryx@fedora$ kubectl get application homework-web -n homework-gitops -o wide
+pujankhunt@archlinux$ kubectl get application homework-web -n homework-gitops -o wide
 NAME           SYNC STATUS   HEALTH STATUS   REVISION                                   PROJECT
 homework-web   Synced        Healthy         28424dbac1f9cef8f395e608e8471a137a2ca7f4   homework
 
-zephoryx@fedora$ kubectl get deploy web -n homework-gitops-demo
+pujankhunt@archlinux$ kubectl get deploy web -n homework-gitops-demo
 NAME   READY   UP-TO-DATE   AVAILABLE   AGE
 web    2/2     2            2           2m5s
 
-zephoryx@fedora$ kubectl scale deploy web -n homework-gitops-demo --replicas=1
+pujankhunt@archlinux$ kubectl scale deploy web -n homework-gitops-demo --replicas=1
 deployment.apps/web scaled
 
-zephoryx@fedora$ kubectl get deploy web -n homework-gitops-demo
+pujankhunt@archlinux$ kubectl get deploy web -n homework-gitops-demo
 NAME   READY   UP-TO-DATE   AVAILABLE   AGE
 web    2/2     2            2           2m25s
 
-zephoryx@fedora$ kubectl get application homework-web -n homework-gitops -o wide
+pujankhunt@archlinux$ kubectl get application homework-web -n homework-gitops -o wide
 NAME           SYNC STATUS   HEALTH STATUS   REVISION                                   PROJECT
 homework-web   Synced        Healthy         28424dbac1f9cef8f395e608e8471a137a2ca7f4   homework
 ```
@@ -57,14 +57,14 @@ homework-web   Synced        Healthy         28424dbac1f9cef8f395e608e8471a137a2
 ### Git change: two replicas to three
 
 ```bash
-zephoryx@fedora$ git log -1 --oneline
+pujankhunt@archlinux$ git log -1 --oneline
 1924ccc Change GitOps web deployment to three replicas
 
-zephoryx@fedora$ kubectl get application homework-web -n homework-gitops -o wide
+pujankhunt@archlinux$ kubectl get application homework-web -n homework-gitops -o wide
 NAME           SYNC STATUS   HEALTH STATUS   REVISION                                   PROJECT
 homework-web   Synced        Healthy         1924ccc230469d4a03a143cf3e063f72b6aa28b1   homework
 
-zephoryx@fedora$ kubectl get deploy web -n homework-gitops-demo
+pujankhunt@archlinux$ kubectl get deploy web -n homework-gitops-demo
 NAME   READY   UP-TO-DATE   AVAILABLE   AGE
 web    3/3     3            3           4m59s
 ```
@@ -72,7 +72,7 @@ web    3/3     3            3           4m59s
 ### Alert during the database outage
 
 ```bash
-zephoryx@fedora$ curl http://127.0.0.1:19090/api/v1/targets
+pujankhunt@archlinux$ curl http://127.0.0.1:19090/api/v1/targets
 [
   {
     "job": "prometheus",
@@ -86,7 +86,7 @@ zephoryx@fedora$ curl http://127.0.0.1:19090/api/v1/targets
   }
 ]
 
-zephoryx@fedora$ curl http://127.0.0.1:19090/api/v1/alerts
+pujankhunt@archlinux$ curl http://127.0.0.1:19090/api/v1/alerts
 {
   "status": "success",
   "data": {
@@ -97,7 +97,7 @@ zephoryx@fedora$ curl http://127.0.0.1:19090/api/v1/alerts
   }
 }
 
-zephoryx@fedora$ curl http://127.0.0.1:19090/api/v1/query?query=up
+pujankhunt@archlinux$ curl http://127.0.0.1:19090/api/v1/query?query=up
 {
   "status": "success",
   "data": {
@@ -117,7 +117,7 @@ zephoryx@fedora$ curl http://127.0.0.1:19090/api/v1/query?query=up
 ### Metrics after recovery
 
 ```bash
-zephoryx@fedora$ curl http://127.0.0.1:19090/api/v1/targets
+pujankhunt@archlinux$ curl http://127.0.0.1:19090/api/v1/targets
 {
   "status": "success",
   "data": {
@@ -133,7 +133,7 @@ zephoryx@fedora$ curl http://127.0.0.1:19090/api/v1/targets
   }
 }
 
-zephoryx@fedora$ curl http://127.0.0.1:19090/api/v1/alerts
+pujankhunt@archlinux$ curl http://127.0.0.1:19090/api/v1/alerts
 {
   "status": "success",
   "data": {
@@ -141,7 +141,7 @@ zephoryx@fedora$ curl http://127.0.0.1:19090/api/v1/alerts
   }
 }
 
-zephoryx@fedora$ curl http://127.0.0.1:19090/api/v1/query?query=up
+pujankhunt@archlinux$ curl http://127.0.0.1:19090/api/v1/query?query=up
 {
   "status": "success",
   "data": {
@@ -157,7 +157,7 @@ zephoryx@fedora$ curl http://127.0.0.1:19090/api/v1/query?query=up
   }
 }
 
-zephoryx@fedora$ curl http://127.0.0.1:19090/api/v1/query?query=process_resident_memory_bytes
+pujankhunt@archlinux$ curl http://127.0.0.1:19090/api/v1/query?query=process_resident_memory_bytes
 {
   "status": "success",
   "data": {
@@ -173,7 +173,7 @@ zephoryx@fedora$ curl http://127.0.0.1:19090/api/v1/query?query=process_resident
   }
 }
 
-zephoryx@fedora$ kubectl top pods -n homework-final
+pujankhunt@archlinux$ kubectl top pods -n homework-final
 NAME                        CPU(cores)   MEMORY(bytes)
 backend-8584bc89c8-8p4ml    2m           64Mi
 backend-8584bc89c8-ddktr    2m           67Mi
@@ -181,7 +181,7 @@ frontend-6f65884958-gmm5s   1m           10Mi
 frontend-6f65884958-xgw2h   1m           10Mi
 postgres-0                  3m           31Mi
 
-zephoryx@fedora$ kubectl logs deployment/backend -n homework-final --tail=15
+pujankhunt@archlinux$ kubectl logs deployment/backend -n homework-final --tail=15
 INFO:     10.244.0.1:42106 - "GET /health HTTP/1.1" 200 OK
 INFO:     10.244.0.1:42112 - "GET /ready HTTP/1.1" 200 OK
 INFO:     10.244.0.1:42120 - "GET /ready HTTP/1.1" 200 OK
@@ -199,7 +199,7 @@ INFO:     10.244.0.83:43920 - "GET /metrics HTTP/1.1" 200 OK
 INFO:     10.244.0.1:57580 - "GET /ready HTTP/1.1" 200 OK
 Found 2 pods, using pod/backend-8584bc89c8-ddktr
 
-zephoryx@fedora$ curl -fsS http://127.0.0.1:13001/api/health
+pujankhunt@archlinux$ curl -fsS http://127.0.0.1:13001/api/health
 {
   "database": "ok",
   "version": "13.2.3",

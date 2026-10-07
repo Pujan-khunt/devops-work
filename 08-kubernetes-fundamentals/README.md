@@ -23,10 +23,10 @@ Results from 7 October 2026. Build and diagnostic output is shortened.
 ### Commands and results
 
 ```bash
-zephoryx@fedora$ kubectl create namespace homework-s09
+pujankhunt@archlinux$ kubectl create namespace homework-s09
 namespace/homework-s09 created
 
-zephoryx@fedora$ minikube status
+pujankhunt@archlinux$ minikube status
 minikube
 type: Control Plane
 host: Running
@@ -34,16 +34,16 @@ kubelet: Running
 apiserver: Running
 kubeconfig: Configured
 
-zephoryx@fedora$ kubectl -n homework-s09 cluster-info
+pujankhunt@archlinux$ kubectl -n homework-s09 cluster-info
 Kubernetes control plane is running at https://192.168.49.2:8443
 
 To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
 
-zephoryx@fedora$ kubectl -n homework-s09 get nodes -o wide
+pujankhunt@archlinux$ kubectl -n homework-s09 get nodes -o wide
 NAME       STATUS   ROLES           AGE   VERSION   INTERNAL-IP    EXTERNAL-IP   OS-IMAGE                         KERNEL-VERSION                  CONTAINER-RUNTIME
 minikube   Ready    control-plane   29d   v1.37.0   192.168.49.2   <none>        Debian GNU/Linux 12 (bookworm)   7.2.8-200.fc44.x86_64 (amd64)   containerd://2.3.4
 
-zephoryx@fedora$ kubectl -n homework-s09 get pods -n kube-system
+pujankhunt@archlinux$ kubectl -n homework-s09 get pods -n kube-system
 NAME                               READY   STATUS    RESTARTS       AGE
 coredns-559f6c778d-46j8r           1/1     Running   8 (16m ago)    29d
 etcd-minikube                      1/1     Running   7 (16m ago)    29d
@@ -55,16 +55,16 @@ kube-scheduler-minikube            1/1     Running   7 (16m ago)    29d
 metrics-server-768f9f6999-blwjv    1/1     Running   6 (15m ago)    18d
 storage-provisioner                1/1     Running   21 (15m ago)   29d
 
-zephoryx@fedora$ kubectl -n homework-s09 apply -f 08-kubernetes-fundamentals/app.yaml
+pujankhunt@archlinux$ kubectl -n homework-s09 apply -f 08-kubernetes-fundamentals/app.yaml
 deployment.apps/web created
 service/web created
 
-zephoryx@fedora$ kubectl -n homework-s09 rollout status deployment/web
+pujankhunt@archlinux$ kubectl -n homework-s09 rollout status deployment/web
 Waiting for deployment "web" rollout to finish: 0 of 2 updated replicas are available...
 Waiting for deployment "web" rollout to finish: 1 of 2 updated replicas are available...
 deployment "web" successfully rolled out
 
-zephoryx@fedora$ kubectl -n homework-s09 get pods,deploy,rs,svc -o wide
+pujankhunt@archlinux$ kubectl -n homework-s09 get pods,deploy,rs,svc -o wide
 NAME                       READY   STATUS    RESTARTS   AGE   IP            NODE       NOMINATED NODE   READINESS GATES
 pod/web-7b8558696c-58hs5   1/1     Running   0          21s   10.244.0.11   minikube   <none>           <none>
 pod/web-7b8558696c-h74bn   1/1     Running   0          21s   10.244.0.10   minikube   <none>           <none>
@@ -78,7 +78,7 @@ replicaset.apps/web-7b8558696c   2         2         2       21s   web          
 NAME          TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)   AGE   SELECTOR
 service/web   ClusterIP   10.98.226.112   <none>        80/TCP    21s   app=web
 
-zephoryx@fedora$ kubectl -n homework-s09 explain deployment.spec.replicas
+pujankhunt@archlinux$ kubectl -n homework-s09 explain deployment.spec.replicas
 GROUP:      apps
 KIND:       Deployment
 VERSION:    v1
@@ -89,26 +89,26 @@ DESCRIPTION:
     Number of desired pods. This is a pointer to distinguish between explicit
     zero and not specified. Defaults to 1.
 
-zephoryx@fedora$ kubectl -n homework-s09 run client --image=busybox:1.37 --restart=Never -- sleep 7200
+pujankhunt@archlinux$ kubectl -n homework-s09 run client --image=busybox:1.37 --restart=Never -- sleep 7200
 pod/client created
 
-zephoryx@fedora$ kubectl -n homework-s09 wait --for=condition=Ready pod/client
+pujankhunt@archlinux$ kubectl -n homework-s09 wait --for=condition=Ready pod/client
 pod/client condition met
 
-zephoryx@fedora$ kubectl -n homework-s09 exec client -- wget -qO- http://web
+pujankhunt@archlinux$ kubectl -n homework-s09 exec client -- wget -qO- http://web
 <h1>Welcome to nginx!</h1>
 
-zephoryx@fedora$ kubectl -n homework-s09 scale deployment/web --replicas=3
+pujankhunt@archlinux$ kubectl -n homework-s09 scale deployment/web --replicas=3
 deployment.apps/web scaled
 
-zephoryx@fedora$ kubectl -n homework-s09 rollout status deployment/web
+pujankhunt@archlinux$ kubectl -n homework-s09 rollout status deployment/web
 Waiting for deployment "web" rollout to finish: 2 of 3 updated replicas are available...
 deployment "web" successfully rolled out
 
-zephoryx@fedora$ kubectl -n homework-s09 set image deployment/web web=nginx:1.29-alpine
+pujankhunt@archlinux$ kubectl -n homework-s09 set image deployment/web web=nginx:1.29-alpine
 deployment.apps/web image updated
 
-zephoryx@fedora$ kubectl -n homework-s09 rollout status deployment/web
+pujankhunt@archlinux$ kubectl -n homework-s09 rollout status deployment/web
 Waiting for deployment "web" rollout to finish: 1 out of 3 new replicas have been updated...
 Waiting for deployment "web" rollout to finish: 1 out of 3 new replicas have been updated...
 Waiting for deployment "web" rollout to finish: 1 out of 3 new replicas have been updated...
@@ -121,17 +121,17 @@ Waiting for deployment "web" rollout to finish: 1 old replicas are pending termi
 Waiting for deployment "web" rollout to finish: 1 old replicas are pending termination...
 deployment "web" successfully rolled out
 
-zephoryx@fedora$ kubectl -n homework-s09 rollout history deployment/web
+pujankhunt@archlinux$ kubectl -n homework-s09 rollout history deployment/web
 deployment.apps/web
 REVISION  CHANGE-CAUSE
 1         <none>
 2         <none>
 
-zephoryx@fedora$ kubectl -n homework-s09 rollout undo deployment/web
+pujankhunt@archlinux$ kubectl -n homework-s09 rollout undo deployment/web
 Warning: resource deployments/web was previously managed with 'kubectl apply'. Rolling back will not update the kubectl.kubernetes.io/last-applied-configuration annotation, which may cause unexpected behavior on future 'kubectl apply' operations. Consider using 'kubectl apply' with your previous configuration file instead.
 deployment.apps/web rolled back
 
-zephoryx@fedora$ kubectl -n homework-s09 rollout status deployment/web
+pujankhunt@archlinux$ kubectl -n homework-s09 rollout status deployment/web
 Waiting for deployment "web" rollout to finish: 1 out of 3 new replicas have been updated...
 Waiting for deployment "web" rollout to finish: 1 out of 3 new replicas have been updated...
 Waiting for deployment "web" rollout to finish: 1 out of 3 new replicas have been updated...
@@ -144,7 +144,7 @@ Waiting for deployment "web" rollout to finish: 1 old replicas are pending termi
 Waiting for deployment "web" rollout to finish: 1 old replicas are pending termination...
 deployment "web" successfully rolled out
 
-zephoryx@fedora$ kubectl -n homework-s09 get pods,deploy,rs,svc -o wide
+pujankhunt@archlinux$ kubectl -n homework-s09 get pods,deploy,rs,svc -o wide
 NAME                       READY   STATUS        RESTARTS   AGE   IP            NODE       NOMINATED NODE   READINESS GATES
 pod/client                 1/1     Running       0          31s   10.244.0.12   minikube   <none>           <none>
 pod/web-755df94d58-4cbb8   1/1     Terminating   0          24s   10.244.0.14   minikube   <none>           <none>

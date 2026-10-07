@@ -9,7 +9,7 @@ See the [session README](../README.md) for the architecture, cloud run and clean
 The commands below ran from this Terraform project folder. Validation checks configuration; it does not provision cloud resources.
 
 ```bash
-zephoryx@fedora$ terraform init -backend=false
+pujankhunt@archlinux$ terraform init -backend=false
 Initializing provider plugins...
 - Finding hashicorp/azurerm versions matching "~> 4.0"...
 - Installing hashicorp/azurerm v4.81.0...
@@ -24,9 +24,9 @@ If you ever set or change modules or backend configuration for Terraform,
 rerun this command to reinitialize your working directory. If you forget, other
 commands will detect it and remind you to do so if necessary.
 
-zephoryx@fedora$ terraform validate
+pujankhunt@archlinux$ terraform validate
 Success! The configuration is valid.
 
-zephoryx@fedora$ terraform fmt -check -diff
+pujankhunt@archlinux$ terraform fmt -check -diff
 Success! The configuration is valid.
 ```

@@ -45,78 +45,78 @@ Results from 7 October 2026. Build and diagnostic output is shortened.
 ### Commands and results
 
 ```bash
-zephoryx@fedora$ kubectl create namespace homework-s10
+pujankhunt@archlinux$ kubectl create namespace homework-s10
 namespace/homework-s10 created
 
-zephoryx@fedora$ kubectl -n homework-s10 apply -f 09-kubernetes-core-objects/rolling.yaml
+pujankhunt@archlinux$ kubectl -n homework-s10 apply -f 09-kubernetes-core-objects/rolling.yaml
 deployment.apps/rolling created
 
-zephoryx@fedora$ kubectl -n homework-s10 rollout status deployment/rolling
+pujankhunt@archlinux$ kubectl -n homework-s10 rollout status deployment/rolling
 Waiting for deployment "rolling" rollout to finish: 0 of 3 updated replicas are available...
 Waiting for deployment "rolling" rollout to finish: 1 of 3 updated replicas are available...
 Waiting for deployment "rolling" rollout to finish: 2 of 3 updated replicas are available...
 deployment "rolling" successfully rolled out
 
-zephoryx@fedora$ kubectl -n homework-s10 apply -f 09-kubernetes-core-objects/blue.yaml
+pujankhunt@archlinux$ kubectl -n homework-s10 apply -f 09-kubernetes-core-objects/blue.yaml
 deployment.apps/blue created
 
-zephoryx@fedora$ kubectl -n homework-s10 rollout status deployment/blue
+pujankhunt@archlinux$ kubectl -n homework-s10 rollout status deployment/blue
 Waiting for deployment "blue" rollout to finish: 0 of 2 updated replicas are available...
 Waiting for deployment "blue" rollout to finish: 1 of 2 updated replicas are available...
 deployment "blue" successfully rolled out
 
-zephoryx@fedora$ kubectl -n homework-s10 apply -f 09-kubernetes-core-objects/green.yaml
+pujankhunt@archlinux$ kubectl -n homework-s10 apply -f 09-kubernetes-core-objects/green.yaml
 deployment.apps/green created
 
-zephoryx@fedora$ kubectl -n homework-s10 rollout status deployment/green
+pujankhunt@archlinux$ kubectl -n homework-s10 rollout status deployment/green
 Waiting for deployment "green" rollout to finish: 0 of 2 updated replicas are available...
 Waiting for deployment "green" rollout to finish: 1 of 2 updated replicas are available...
 deployment "green" successfully rolled out
 
-zephoryx@fedora$ kubectl -n homework-s10 apply -f 09-kubernetes-core-objects/stable.yaml
+pujankhunt@archlinux$ kubectl -n homework-s10 apply -f 09-kubernetes-core-objects/stable.yaml
 deployment.apps/stable created
 
-zephoryx@fedora$ kubectl -n homework-s10 rollout status deployment/stable
+pujankhunt@archlinux$ kubectl -n homework-s10 rollout status deployment/stable
 Waiting for deployment "stable" rollout to finish: 0 of 4 updated replicas are available...
 Waiting for deployment "stable" rollout to finish: 1 of 4 updated replicas are available...
 Waiting for deployment "stable" rollout to finish: 2 of 4 updated replicas are available...
 Waiting for deployment "stable" rollout to finish: 3 of 4 updated replicas are available...
 deployment "stable" successfully rolled out
 
-zephoryx@fedora$ kubectl -n homework-s10 apply -f 09-kubernetes-core-objects/canary.yaml
+pujankhunt@archlinux$ kubectl -n homework-s10 apply -f 09-kubernetes-core-objects/canary.yaml
 deployment.apps/canary created
 
-zephoryx@fedora$ kubectl -n homework-s10 rollout status deployment/canary
+pujankhunt@archlinux$ kubectl -n homework-s10 rollout status deployment/canary
 Waiting for deployment "canary" rollout to finish: 0 of 1 updated replicas are available...
 deployment "canary" successfully rolled out
 
-zephoryx@fedora$ kubectl -n homework-s10 apply -f 09-kubernetes-core-objects/recreate.yaml
+pujankhunt@archlinux$ kubectl -n homework-s10 apply -f 09-kubernetes-core-objects/recreate.yaml
 deployment.apps/recreate created
 
-zephoryx@fedora$ kubectl -n homework-s10 rollout status deployment/recreate
+pujankhunt@archlinux$ kubectl -n homework-s10 rollout status deployment/recreate
 Waiting for deployment "recreate" rollout to finish: 0 of 2 updated replicas are available...
 Waiting for deployment "recreate" rollout to finish: 1 of 2 updated replicas are available...
 deployment "recreate" successfully rolled out
 
-zephoryx@fedora$ kubectl -n homework-s10 apply -f 09-kubernetes-core-objects/services.yaml
+pujankhunt@archlinux$ kubectl -n homework-s10 apply -f 09-kubernetes-core-objects/services.yaml
 service/colour created
 service/canary created
 
-zephoryx@fedora$ kubectl -n homework-s10 run client --image=busybox:1.37 --restart=Never -- sleep 7200
+pujankhunt@archlinux$ kubectl -n homework-s10 run client --image=busybox:1.37 --restart=Never -- sleep 7200
 pod/client created
 
-zephoryx@fedora$ kubectl -n homework-s10 wait --for=condition=Ready pod/client
+pujankhunt@archlinux$ kubectl -n homework-s10 wait --for=condition=Ready pod/client
 pod/client condition met
 
-zephoryx@fedora$ kubectl -n homework-s10 exec deployment/blue -- sh -c 'printf '"'"'blue\n'"'"' > /usr/share/nginx/html/version'
+pujankhunt@archlinux$ kubectl -n homework-s10 exec deployment/blue -- sh -c 'printf '"'"'blue\n'"'"' > /usr/share/nginx/html/version'
 
-zephoryx@fedora$ kubectl -n homework-s10 exec deployment/green -- sh -c 'printf '"'"'green\n'"'"' > /usr/share/nginx/html/version'
+pujankhunt@archlinux$ kubectl -n homework-s10 exec deployment/green -- sh -c 'printf '"'"'green\n'"'"' > /usr/share/nginx/html/version'
 
-zephoryx@fedora$ kubectl -n homework-s10 exec deployment/stable -- sh -c 'printf '"'"'stable\n'"'"' > /usr/share/nginx/html/version'
+pujankhunt@archlinux$ kubectl -n homework-s10 exec deployment/stable -- sh -c 'printf '"'"'stable\n'"'"' > /usr/share/nginx/html/version'
 
-zephoryx@fedora$ kubectl -n homework-s10 exec deployment/canary -- sh -c 'printf '"'"'canary\n'"'"' > /usr/share/nginx/html/version'
+pujankhunt@archlinux$ kubectl -n homework-s10 exec deployment/canary -- sh -c 'printf '"'"'canary\n'"'"' > /usr/share/nginx/html/version'
 
-zephoryx@fedora$ kubectl -n homework-s10 get rs
+pujankhunt@archlinux$ kubectl -n homework-s10 get rs
 NAME                  DESIRED   CURRENT   READY   AGE
 blue-5fcb5494ff       2         2         2       11s
 canary-64767d98cf     1         1         1       6s
@@ -125,10 +125,10 @@ recreate-5b6cd97d96   2         2         2       5s
 rolling-7b8664d444    3         3         3       13s
 stable-6df6768768     4         4         4       8s
 
-zephoryx@fedora$ kubectl -n homework-s10 set image deployment/rolling web=nginx:1.29-alpine
+pujankhunt@archlinux$ kubectl -n homework-s10 set image deployment/rolling web=nginx:1.29-alpine
 deployment.apps/rolling image updated
 
-zephoryx@fedora$ kubectl -n homework-s10 get pods,rs
+pujankhunt@archlinux$ kubectl -n homework-s10 get pods,rs
 NAME                            READY   STATUS              RESTARTS   AGE
 pod/blue-5fcb5494ff-qcn5j       1/1     Running             0          12s
 pod/blue-5fcb5494ff-xrm65       1/1     Running             0          12s
@@ -144,7 +144,7 @@ replicaset.apps/rolling-7b8664d444    3         3         3       14s
 replicaset.apps/rolling-8b6c77677     1         1         0       1s
 replicaset.apps/stable-6df6768768     4         4         4       9s
 
-zephoryx@fedora$ kubectl -n homework-s10 rollout status deployment/rolling
+pujankhunt@archlinux$ kubectl -n homework-s10 rollout status deployment/rolling
 Waiting for deployment "rolling" rollout to finish: 1 out of 3 new replicas have been updated...
 Waiting for deployment "rolling" rollout to finish: 1 out of 3 new replicas have been updated...
 Waiting for deployment "rolling" rollout to finish: 1 out of 3 new replicas have been updated...
@@ -157,7 +157,7 @@ Waiting for deployment "rolling" rollout to finish: 1 old replicas are pending t
 Waiting for deployment "rolling" rollout to finish: 1 old replicas are pending termination...
 deployment "rolling" successfully rolled out
 
-zephoryx@fedora$ kubectl -n homework-s10 get rs
+pujankhunt@archlinux$ kubectl -n homework-s10 get rs
 NAME                  DESIRED   CURRENT   READY   AGE
 blue-5fcb5494ff       2         2         2       15s
 canary-64767d98cf     1         1         1       10s
@@ -167,20 +167,20 @@ rolling-7b8664d444    0         0         0       17s
 rolling-8b6c77677     3         3         3       4s
 stable-6df6768768     4         4         4       12s
 
-zephoryx@fedora$ kubectl -n homework-s10 exec client -- wget -qO- http://colour/version
+pujankhunt@archlinux$ kubectl -n homework-s10 exec client -- wget -qO- http://colour/version
 blue
 
-zephoryx@fedora$ kubectl -n homework-s10 patch svc colour --type=merge -p '{"spec":{"selector":{"app":"colour","version":"green"}}}'
+pujankhunt@archlinux$ kubectl -n homework-s10 patch svc colour --type=merge -p '{"spec":{"selector":{"app":"colour","version":"green"}}}'
 service/colour patched
 
-zephoryx@fedora$ kubectl -n homework-s10 exec client -- wget -qO- http://colour/version
+pujankhunt@archlinux$ kubectl -n homework-s10 exec client -- wget -qO- http://colour/version
 green
 
-zephoryx@fedora$ kubectl -n homework-s10 get endpointslices -l kubernetes.io/service-name=canary -o wide
+pujankhunt@archlinux$ kubectl -n homework-s10 get endpointslices -l kubernetes.io/service-name=canary -o wide
 NAME           ADDRESSTYPE   PORTS   ENDPOINTS                                         AGE
 canary-gdx82   IPv4          80      10.244.0.27,10.244.0.28,10.244.0.30 + 2 more...   9s
 
-zephoryx@fedora$ kubectl -n homework-s10 exec client -- sh -c 'for i in $(seq 1 50); do wget -qO- http://canary/version; done | sort | uniq -c'
+pujankhunt@archlinux$ kubectl -n homework-s10 exec client -- sh -c 'for i in $(seq 1 50); do wget -qO- http://canary/version; done | sort | uniq -c'
 wget: server returned error: HTTP/1.1 404 Not Found
 wget: server returned error: HTTP/1.1 404 Not Found
 wget: server returned error: HTTP/1.1 404 Not Found
@@ -196,10 +196,10 @@ wget: server returned error: HTTP/1.1 404 Not Found
      11 canary
      12 stable
 
-zephoryx@fedora$ kubectl -n homework-s10 set image deployment/recreate web=nginx:1.29-alpine
+pujankhunt@archlinux$ kubectl -n homework-s10 set image deployment/recreate web=nginx:1.29-alpine
 deployment.apps/recreate image updated
 
-zephoryx@fedora$ kubectl -n homework-s10 get pods,rs
+pujankhunt@archlinux$ kubectl -n homework-s10 get pods,rs
 NAME                            READY   STATUS        RESTARTS   AGE
 pod/blue-5fcb5494ff-qcn5j       1/1     Running       0          19s
 pod/blue-5fcb5494ff-xrm65       1/1     Running       0          19s
@@ -215,7 +215,7 @@ replicaset.apps/rolling-7b8664d444    0         0         0       21s
 replicaset.apps/rolling-8b6c77677     3         3         3       8s
 replicaset.apps/stable-6df6768768     4         4         4       16s
 
-zephoryx@fedora$ kubectl -n homework-s10 rollout status deployment/recreate
+pujankhunt@archlinux$ kubectl -n homework-s10 rollout status deployment/recreate
 Waiting for deployment "recreate" rollout to finish: 0 out of 2 new replicas have been updated...
 Waiting for deployment "recreate" rollout to finish: 0 out of 2 new replicas have been updated...
 Waiting for deployment "recreate" rollout to finish: 0 out of 2 new replicas have been updated...
@@ -223,7 +223,7 @@ Waiting for deployment "recreate" rollout to finish: 0 of 2 updated replicas are
 Waiting for deployment "recreate" rollout to finish: 1 of 2 updated replicas are available...
 deployment "recreate" successfully rolled out
 
-zephoryx@fedora$ kubectl -n homework-s10 get events --sort-by=.metadata.creationTimestamp
+pujankhunt@archlinux$ kubectl -n homework-s10 get events --sort-by=.metadata.creationTimestamp
 LAST SEEN   TYPE     REASON              OBJECT                           MESSAGE
 23s         Normal   ScalingReplicaSet   deployment/rolling               Scaled up replica set rolling-7b8664d444 from 0 to 3
 22s         Normal   Scheduled           pod/rolling-7b8664d444-79mf6     Successfully assigned homework-s10/rolling-7b8664d444-79mf6 to minikube
@@ -239,47 +239,47 @@ LAST SEEN   TYPE     REASON              OBJECT                           MESSAG
 1s          Normal   Created             pod/recreate-7889dc9c4f-t54tw    Container created
 1s          Normal   Started             pod/recreate-7889dc9c4f-t54tw    Container started
 
-zephoryx@fedora$ kubectl -n homework-s10 apply -f 09-kubernetes-core-objects/lifecycle/01-running.yaml
+pujankhunt@archlinux$ kubectl -n homework-s10 apply -f 09-kubernetes-core-objects/lifecycle/01-running.yaml
 pod/lifecycle-running created
 
-zephoryx@fedora$ kubectl -n homework-s10 apply -f 09-kubernetes-core-objects/lifecycle/02-pending.yaml
+pujankhunt@archlinux$ kubectl -n homework-s10 apply -f 09-kubernetes-core-objects/lifecycle/02-pending.yaml
 pod/lifecycle-pending created
 
-zephoryx@fedora$ kubectl -n homework-s10 apply -f 09-kubernetes-core-objects/lifecycle/03-succeeded.yaml
+pujankhunt@archlinux$ kubectl -n homework-s10 apply -f 09-kubernetes-core-objects/lifecycle/03-succeeded.yaml
 pod/lifecycle-succeeded created
 
-zephoryx@fedora$ kubectl -n homework-s10 apply -f 09-kubernetes-core-objects/lifecycle/04-failed.yaml
+pujankhunt@archlinux$ kubectl -n homework-s10 apply -f 09-kubernetes-core-objects/lifecycle/04-failed.yaml
 pod/lifecycle-failed created
 
-zephoryx@fedora$ kubectl -n homework-s10 apply -f 09-kubernetes-core-objects/lifecycle/05-crashloopbackoff.yaml
+pujankhunt@archlinux$ kubectl -n homework-s10 apply -f 09-kubernetes-core-objects/lifecycle/05-crashloopbackoff.yaml
 pod/lifecycle-crashloop created
 
-zephoryx@fedora$ kubectl -n homework-s10 apply -f 09-kubernetes-core-objects/lifecycle/06-imagepullbackoff.yaml
+pujankhunt@archlinux$ kubectl -n homework-s10 apply -f 09-kubernetes-core-objects/lifecycle/06-imagepullbackoff.yaml
 pod/lifecycle-image-error created
 
-zephoryx@fedora$ kubectl -n homework-s10 apply -f 09-kubernetes-core-objects/lifecycle/07-readiness.yaml
+pujankhunt@archlinux$ kubectl -n homework-s10 apply -f 09-kubernetes-core-objects/lifecycle/07-readiness.yaml
 pod/lifecycle-readiness created
 
-zephoryx@fedora$ kubectl -n homework-s10 apply -f 09-kubernetes-core-objects/lifecycle/08-liveness.yaml
+pujankhunt@archlinux$ kubectl -n homework-s10 apply -f 09-kubernetes-core-objects/lifecycle/08-liveness.yaml
 pod/lifecycle-liveness created
 
-zephoryx@fedora$ kubectl -n homework-s10 apply -f 09-kubernetes-core-objects/lifecycle/09-startup.yaml
+pujankhunt@archlinux$ kubectl -n homework-s10 apply -f 09-kubernetes-core-objects/lifecycle/09-startup.yaml
 pod/lifecycle-startup created
 
-zephoryx@fedora$ kubectl -n homework-s10 apply -f 09-kubernetes-core-objects/lifecycle/10-init-container.yaml
+pujankhunt@archlinux$ kubectl -n homework-s10 apply -f 09-kubernetes-core-objects/lifecycle/10-init-container.yaml
 pod/lifecycle-init created
 
-zephoryx@fedora$ kubectl -n homework-s10 apply -f 09-kubernetes-core-objects/lifecycle/11-multi-container.yaml
+pujankhunt@archlinux$ kubectl -n homework-s10 apply -f 09-kubernetes-core-objects/lifecycle/11-multi-container.yaml
 pod/lifecycle-multi-container created
 
-zephoryx@fedora$ kubectl -n homework-s10 apply -f 09-kubernetes-core-objects/lifecycle/12-termination.yaml
+pujankhunt@archlinux$ kubectl -n homework-s10 apply -f 09-kubernetes-core-objects/lifecycle/12-termination.yaml
 pod/lifecycle-termination created
 
-zephoryx@fedora$ kubectl -n homework-s10 get pod lifecycle-running -o wide
+pujankhunt@archlinux$ kubectl -n homework-s10 get pod lifecycle-running -o wide
 NAME                READY   STATUS    RESTARTS   AGE   IP            NODE       NOMINATED NODE   READINESS GATES
 lifecycle-running   1/1     Running   0          46s   10.244.0.40   minikube   <none>           <none>
 
-zephoryx@fedora$ kubectl -n homework-s10 describe pod lifecycle-running
+pujankhunt@archlinux$ kubectl -n homework-s10 describe pod lifecycle-running
 Name:             lifecycle-running
 Namespace:        homework-s10
 Priority:         0
@@ -295,7 +295,7 @@ Events:
   Normal  Created    45s   kubelet            spec.containers{nginx}: Container created
   Normal  Started    45s   kubelet            spec.containers{nginx}: Container started
 
-zephoryx@fedora$ kubectl -n homework-s10 logs lifecycle-running --all-containers=true
+pujankhunt@archlinux$ kubectl -n homework-s10 logs lifecycle-running --all-containers=true
 /docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
 /docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
 /docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
@@ -311,11 +311,11 @@ zephoryx@fedora$ kubectl -n homework-s10 logs lifecycle-running --all-containers
 2026/10/07 12:51:02 [notice] 1#1: start worker process 40
 2026/10/07 12:51:02 [notice] 1#1: start worker process 41
 
-zephoryx@fedora$ kubectl -n homework-s10 get pod lifecycle-pending -o wide
+pujankhunt@archlinux$ kubectl -n homework-s10 get pod lifecycle-pending -o wide
 NAME                READY   STATUS    RESTARTS   AGE   IP       NODE     NOMINATED NODE   READINESS GATES
 lifecycle-pending   0/1     Pending   0          47s   <none>   <none>   <none>           <none>
 
-zephoryx@fedora$ kubectl -n homework-s10 describe pod lifecycle-pending
+pujankhunt@archlinux$ kubectl -n homework-s10 describe pod lifecycle-pending
 Name:             lifecycle-pending
 Namespace:        homework-s10
 Priority:         0
@@ -331,13 +331,13 @@ Events:
   Warning  FailedScheduling  47s                default-scheduler  0/1 nodes are available: 1 Insufficient cpu. preemption: 0/1 nodes are available: 1 Preemption is not helpful for scheduling.
   Warning  FailedScheduling  38s (x2 over 38s)  default-scheduler  0/1 nodes are available: 1 Insufficient cpu. preemption: 0/1 nodes are available: 1 Preemption is not helpful for scheduling.
 
-zephoryx@fedora$ kubectl -n homework-s10 logs lifecycle-pending --all-containers=true
+pujankhunt@archlinux$ kubectl -n homework-s10 logs lifecycle-pending --all-containers=true
 
-zephoryx@fedora$ kubectl -n homework-s10 get pod lifecycle-succeeded -o wide
+pujankhunt@archlinux$ kubectl -n homework-s10 get pod lifecycle-succeeded -o wide
 NAME                  READY   STATUS      RESTARTS   AGE   IP            NODE       NOMINATED NODE   READINESS GATES
 lifecycle-succeeded   0/1     Completed   0          48s   10.244.0.41   minikube   <none>           <none>
 
-zephoryx@fedora$ kubectl -n homework-s10 describe pod lifecycle-succeeded
+pujankhunt@archlinux$ kubectl -n homework-s10 describe pod lifecycle-succeeded
 Name:             lifecycle-succeeded
 Namespace:        homework-s10
 Priority:         0
@@ -350,15 +350,15 @@ Service Account:  default
   Normal  Created    47s   kubelet            spec.containers{task}: Container created
   Normal  Started    47s   kubelet            spec.containers{task}: Container started
 
-zephoryx@fedora$ kubectl -n homework-s10 logs lifecycle-succeeded --all-containers=true
+pujankhunt@archlinux$ kubectl -n homework-s10 logs lifecycle-succeeded --all-containers=true
 Task started
 Task completed successfully
 
-zephoryx@fedora$ kubectl -n homework-s10 get pod lifecycle-failed -o wide
+pujankhunt@archlinux$ kubectl -n homework-s10 get pod lifecycle-failed -o wide
 NAME               READY   STATUS   RESTARTS   AGE   IP            NODE       NOMINATED NODE   READINESS GATES
 lifecycle-failed   0/1     Error    0          48s   10.244.0.42   minikube   <none>           <none>
 
-zephoryx@fedora$ kubectl -n homework-s10 describe pod lifecycle-failed
+pujankhunt@archlinux$ kubectl -n homework-s10 describe pod lifecycle-failed
 Name:             lifecycle-failed
 Namespace:        homework-s10
 Priority:         0
@@ -371,15 +371,15 @@ Service Account:  default
   Normal  Created    48s   kubelet            spec.containers{task}: Container created
   Normal  Started    47s   kubelet            spec.containers{task}: Container started
 
-zephoryx@fedora$ kubectl -n homework-s10 logs lifecycle-failed --all-containers=true
+pujankhunt@archlinux$ kubectl -n homework-s10 logs lifecycle-failed --all-containers=true
 Task started
 Task failed
 
-zephoryx@fedora$ kubectl -n homework-s10 get pod lifecycle-crashloop -o wide
+pujankhunt@archlinux$ kubectl -n homework-s10 get pod lifecycle-crashloop -o wide
 NAME                  READY   STATUS   RESTARTS      AGE   IP            NODE       NOMINATED NODE   READINESS GATES
 lifecycle-crashloop   0/1     Error    2 (41s ago)   49s   10.244.0.43   minikube   <none>           <none>
 
-zephoryx@fedora$ kubectl -n homework-s10 describe pod lifecycle-crashloop
+pujankhunt@archlinux$ kubectl -n homework-s10 describe pod lifecycle-crashloop
 Name:             lifecycle-crashloop
 Namespace:        homework-s10
 Priority:         0
@@ -394,15 +394,15 @@ Service Account:  default
   Normal   Started    30s (x3 over 48s)  kubelet            spec.containers{crashing-app}: Container started
   Warning  BackOff    26s (x2 over 40s)  kubelet            spec.containers{crashing-app}: Back-off restarting failed container crashing-app in pod lifecycle-crashloop_homework-s10(b9d5233b-5ed6-4f78-a853-05e322a3d2fe)
 
-zephoryx@fedora$ kubectl -n homework-s10 logs lifecycle-crashloop --all-containers=true
+pujankhunt@archlinux$ kubectl -n homework-s10 logs lifecycle-crashloop --all-containers=true
 Application started
 Application crashed
 
-zephoryx@fedora$ kubectl -n homework-s10 get pod lifecycle-image-error -o wide
+pujankhunt@archlinux$ kubectl -n homework-s10 get pod lifecycle-image-error -o wide
 NAME                    READY   STATUS             RESTARTS   AGE   IP            NODE       NOMINATED NODE   READINESS GATES
 lifecycle-image-error   0/1     ImagePullBackOff   0          49s   10.244.0.44   minikube   <none>           <none>
 
-zephoryx@fedora$ kubectl -n homework-s10 describe pod lifecycle-image-error
+pujankhunt@archlinux$ kubectl -n homework-s10 describe pod lifecycle-image-error
 Name:             lifecycle-image-error
 Namespace:        homework-s10
 Priority:         0
@@ -415,15 +415,15 @@ Service Account:  default
   Warning  Failed     4s (x3 over 47s)   kubelet            spec.containers{broken-image}: Failed to pull image "jakwehrgkaejw:kahsdfgkhj": failed to pull and unpack image "docker.io/library/jakwehrgkaejw:kahsdfgkhj": failed to resolve reference "docker.io/library/jakwehrgkaejw:kahsdfgkhj": pull access denied, repository does not exist or may require authorization: server message: insufficient_scope: authorization failed
   Warning  Failed     4s (x3 over 47s)   kubelet            spec.containers{broken-image}: Error: ErrImagePull
 
-zephoryx@fedora$ kubectl -n homework-s10 logs lifecycle-image-error --all-containers=true
+pujankhunt@archlinux$ kubectl -n homework-s10 logs lifecycle-image-error --all-containers=true
 Error from server (BadRequest): container "broken-image" in pod "lifecycle-image-error" is waiting to start: trying and failing to pull image
 # Exit status: 1
 
-zephoryx@fedora$ kubectl -n homework-s10 get pod lifecycle-readiness -o wide
+pujankhunt@archlinux$ kubectl -n homework-s10 get pod lifecycle-readiness -o wide
 NAME                  READY   STATUS    RESTARTS   AGE   IP            NODE       NOMINATED NODE   READINESS GATES
 lifecycle-readiness   1/1     Running   0          50s   10.244.0.45   minikube   <none>           <none>
 
-zephoryx@fedora$ kubectl -n homework-s10 describe pod lifecycle-readiness
+pujankhunt@archlinux$ kubectl -n homework-s10 describe pod lifecycle-readiness
 Name:             lifecycle-readiness
 Namespace:        homework-s10
 Priority:         0
@@ -439,7 +439,7 @@ Events:
   Normal  Created    49s   kubelet            spec.containers{nginx}: Container created
   Normal  Started    49s   kubelet            spec.containers{nginx}: Container started
 
-zephoryx@fedora$ kubectl -n homework-s10 logs lifecycle-readiness --all-containers=true
+pujankhunt@archlinux$ kubectl -n homework-s10 logs lifecycle-readiness --all-containers=true
 /docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
 /docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
 /docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
@@ -455,11 +455,11 @@ zephoryx@fedora$ kubectl -n homework-s10 logs lifecycle-readiness --all-containe
 10.244.0.1 - - [07/Oct/2026:12:51:46 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.37" "-"
 10.244.0.1 - - [07/Oct/2026:12:51:51 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.37" "-"
 
-zephoryx@fedora$ kubectl -n homework-s10 get pod lifecycle-liveness -o wide
+pujankhunt@archlinux$ kubectl -n homework-s10 get pod lifecycle-liveness -o wide
 NAME                 READY   STATUS    RESTARTS   AGE   IP            NODE       NOMINATED NODE   READINESS GATES
 lifecycle-liveness   1/1     Running   0          50s   10.244.0.46   minikube   <none>           <none>
 
-zephoryx@fedora$ kubectl -n homework-s10 describe pod lifecycle-liveness
+pujankhunt@archlinux$ kubectl -n homework-s10 describe pod lifecycle-liveness
 Name:             lifecycle-liveness
 Namespace:        homework-s10
 Priority:         0
@@ -475,15 +475,15 @@ Start Time:       Wed, 07 Oct 2026 18:21:05 +0530
   Warning  Unhealthy  20s (x2 over 25s)  kubelet            spec.containers{app}: Liveness probe failed:
   Normal   Killing    20s                kubelet            spec.containers{app}: Container app failed liveness probe, will be restarted
 
-zephoryx@fedora$ kubectl -n homework-s10 logs lifecycle-liveness --all-containers=true
+pujankhunt@archlinux$ kubectl -n homework-s10 logs lifecycle-liveness --all-containers=true
 App started
 Health file removed
 
-zephoryx@fedora$ kubectl -n homework-s10 get pod lifecycle-startup -o wide
+pujankhunt@archlinux$ kubectl -n homework-s10 get pod lifecycle-startup -o wide
 NAME                READY   STATUS    RESTARTS   AGE   IP            NODE       NOMINATED NODE   READINESS GATES
 lifecycle-startup   1/1     Running   0          51s   10.244.0.47   minikube   <none>           <none>
 
-zephoryx@fedora$ kubectl -n homework-s10 describe pod lifecycle-startup
+pujankhunt@archlinux$ kubectl -n homework-s10 describe pod lifecycle-startup
 Name:             lifecycle-startup
 Namespace:        homework-s10
 Priority:         0
@@ -499,15 +499,15 @@ Start Time:       Wed, 07 Oct 2026 18:21:05 +0530
   Normal   Started    50s                kubelet            spec.containers{slow-app}: Container started
   Warning  Unhealthy  21s (x6 over 46s)  kubelet            spec.containers{slow-app}: Startup probe failed:
 
-zephoryx@fedora$ kubectl -n homework-s10 logs lifecycle-startup --all-containers=true
+pujankhunt@archlinux$ kubectl -n homework-s10 logs lifecycle-startup --all-containers=true
 Application starting...
 Application started
 
-zephoryx@fedora$ kubectl -n homework-s10 get pod lifecycle-init -o wide
+pujankhunt@archlinux$ kubectl -n homework-s10 get pod lifecycle-init -o wide
 NAME             READY   STATUS    RESTARTS   AGE   IP            NODE       NOMINATED NODE   READINESS GATES
 lifecycle-init   1/1     Running   0          52s   10.244.0.48   minikube   <none>           <none>
 
-zephoryx@fedora$ kubectl -n homework-s10 describe pod lifecycle-init
+pujankhunt@archlinux$ kubectl -n homework-s10 describe pod lifecycle-init
 Name:             lifecycle-init
 Namespace:        homework-s10
 Priority:         0
@@ -520,7 +520,7 @@ Service Account:  default
   Normal  Created    40s   kubelet            spec.containers{app}: Container created
   Normal  Started    40s   kubelet            spec.containers{app}: Container started
 
-zephoryx@fedora$ kubectl -n homework-s10 logs lifecycle-init --all-containers=true
+pujankhunt@archlinux$ kubectl -n homework-s10 logs lifecycle-init --all-containers=true
 /docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
 /docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
 /docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
@@ -536,11 +536,11 @@ zephoryx@fedora$ kubectl -n homework-s10 logs lifecycle-init --all-containers=tr
 Init container running
 Init complete
 
-zephoryx@fedora$ kubectl -n homework-s10 get pod lifecycle-multi-container -o wide
+pujankhunt@archlinux$ kubectl -n homework-s10 get pod lifecycle-multi-container -o wide
 NAME                        READY   STATUS    RESTARTS   AGE   IP            NODE       NOMINATED NODE   READINESS GATES
 lifecycle-multi-container   2/2     Running   0          52s   10.244.0.49   minikube   <none>           <none>
 
-zephoryx@fedora$ kubectl -n homework-s10 describe pod lifecycle-multi-container
+pujankhunt@archlinux$ kubectl -n homework-s10 describe pod lifecycle-multi-container
 Name:             lifecycle-multi-container
 Namespace:        homework-s10
 Priority:         0
@@ -556,7 +556,7 @@ Start Time:       Wed, 07 Oct 2026 18:21:06 +0530
   Normal  Created    51s   kubelet            spec.containers{sidecar}: Container created
   Normal  Started    51s   kubelet            spec.containers{sidecar}: Container started
 
-zephoryx@fedora$ kubectl -n homework-s10 logs lifecycle-multi-container --all-containers=true
+pujankhunt@archlinux$ kubectl -n homework-s10 logs lifecycle-multi-container --all-containers=true
 /docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
 /docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
 /docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
@@ -572,11 +572,11 @@ Sidecar is running
 Sidecar is running
 Sidecar is running
 
-zephoryx@fedora$ kubectl -n homework-s10 get pod lifecycle-termination -o wide
+pujankhunt@archlinux$ kubectl -n homework-s10 get pod lifecycle-termination -o wide
 NAME                    READY   STATUS    RESTARTS   AGE   IP            NODE       NOMINATED NODE   READINESS GATES
 lifecycle-termination   1/1     Running   0          53s   10.244.0.50   minikube   <none>           <none>
 
-zephoryx@fedora$ kubectl -n homework-s10 describe pod lifecycle-termination
+pujankhunt@archlinux$ kubectl -n homework-s10 describe pod lifecycle-termination
 Name:             lifecycle-termination
 Namespace:        homework-s10
 Priority:         0
@@ -592,13 +592,13 @@ Events:
   Normal  Created    52s   kubelet            spec.containers{graceful-app}: Container created
   Normal  Started    52s   kubelet            spec.containers{graceful-app}: Container started
 
-zephoryx@fedora$ kubectl -n homework-s10 logs lifecycle-termination --all-containers=true
+pujankhunt@archlinux$ kubectl -n homework-s10 logs lifecycle-termination --all-containers=true
 Application running
 
-zephoryx@fedora$ kubectl -n homework-s10 delete pod lifecycle-termination --wait=true
+pujankhunt@archlinux$ kubectl -n homework-s10 delete pod lifecycle-termination --wait=true
 pod "lifecycle-termination" deleted from homework-s10 namespace
 
-zephoryx@fedora$ kubectl -n homework-s10 get pods,deploy,rs,svc -o wide
+pujankhunt@archlinux$ kubectl -n homework-s10 get pods,deploy,rs,svc -o wide
 NAME                            READY   STATUS             RESTARTS      AGE   IP            NODE       NOMINATED NODE   READINESS GATES
 pod/blue-5fcb5494ff-qcn5j       1/1     Running            0             93s   10.244.0.24   minikube   <none>           <none>
 pod/blue-5fcb5494ff-xrm65       1/1     Running            0             93s   10.244.0.23   minikube   <none>           <none>

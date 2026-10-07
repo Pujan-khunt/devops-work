@@ -59,7 +59,7 @@ rmdir practice
  run(['journalctl','--list-boots','--no-pager'],check=False)
 
 def shell():
- report=Path(tempfile.mkdtemp(prefix='nitish-sysinfo-'))
+ report=Path(tempfile.mkdtemp(prefix='pujan-sysinfo-'))
  run(['bash','02-shell-scripting/sysinfo.sh'],input=f'{report}\nprocesses\nPujan Khunt\n')
 
 def networking():
@@ -68,7 +68,7 @@ def networking():
 
 def git():
  for name in ['task1-commit-a','task2-cherry-pick']:
-  sandbox=tempfile.mkdtemp(prefix='nitish-git-lab-');run(['bash',f'04-git-github/scripts/{name}.sh',sandbox])
+  sandbox=tempfile.mkdtemp(prefix='pujan-git-lab-');run(['bash',f'04-git-github/scripts/{name}.sh',sandbox])
 
 def docker_apps():
  specs=[('nodejs','nodejs-app',3001,3000),('python','python-app',3002,5000),('java','java-app',3003,8080),('apache','Apache-app',3004,80),('react','React-app',3005,80),('nginx','nginx-app',3006,80)]

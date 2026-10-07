@@ -38,9 +38,9 @@ I ran the complete Terraform create, inspect, update and destroy lifecycle again
 ### Create, update and destroy
 
 ```bash
-zephoryx@fedora$ cd 17-terraform-iac/azure-storage-alternative
+pujankhunt@archlinux$ cd 17-terraform-iac/azure-storage-alternative
 
-zephoryx@fedora$ terraform init
+pujankhunt@archlinux$ terraform init
 Initializing the backend...
 
 Initializing provider plugins...
@@ -51,12 +51,12 @@ If you ever set or change modules or backend configuration for Terraform,
 rerun this command to reinitialize your working directory. If you forget, other
 commands will detect it and remind you to do so if necessary.
 
-zephoryx@fedora$ terraform fmt -check
+pujankhunt@archlinux$ terraform fmt -check
 
-zephoryx@fedora$ terraform validate
+pujankhunt@archlinux$ terraform validate
 Success! The configuration is valid.
 
-zephoryx@fedora$ terraform plan -out=lab.tfplan
+pujankhunt@archlinux$ terraform plan -out=lab.tfplan
 data.azurerm_resource_group.lab: Reading...
 data.azurerm_resource_group.lab: Read complete after 2s [id=/subscriptions/<subscription-id>/resourceGroups/rg-devops-homework]
 
@@ -69,7 +69,7 @@ Saved the plan to: lab.tfplan
 To perform exactly these actions, run the following command to apply:
     terraform apply "lab.tfplan"
 
-zephoryx@fedora$ terraform apply lab.tfplan
+pujankhunt@archlinux$ terraform apply lab.tfplan
 azurerm_storage_account.lab: Creating...
 azurerm_storage_account.lab: Still creating... [00m10s elapsed]
 azurerm_storage_account.lab: Still creating... [00m20s elapsed]
@@ -82,10 +82,10 @@ Apply complete! Resources: 3 added, 0 changed, 0 destroyed.
 
 Outputs:
 
-blob_url = "https://nitishiac1791379467.blob.core.windows.net/homework/hello.txt"
-storage_account = "nitishiac1791379467"
+blob_url = "https://pujaniac1791379467.blob.core.windows.net/homework/hello.txt"
+storage_account = "pujaniac1791379467"
 
-zephoryx@fedora$ terraform show
+pujankhunt@archlinux$ terraform show
 # data.azurerm_resource_group.lab:
 data "azurerm_resource_group" "lab" {
     id         = "/subscriptions/<subscription-id>/resourceGroups/rg-devops-homework"
@@ -93,19 +93,19 @@ data "azurerm_resource_group" "lab" {
     managed_by = null
     name       = "rg-devops-homework"
 # ... intermediate output omitted ...
-    url                               = "https://nitishiac1791379467.blob.core.windows.net/homework"
+    url                               = "https://pujaniac1791379467.blob.core.windows.net/homework"
 }
 
 Outputs:
 
-blob_url = "https://nitishiac1791379467.blob.core.windows.net/homework/hello.txt"
-storage_account = "nitishiac1791379467"
+blob_url = "https://pujaniac1791379467.blob.core.windows.net/homework/hello.txt"
+storage_account = "pujaniac1791379467"
 
-zephoryx@fedora$ terraform output
-blob_url = "https://nitishiac1791379467.blob.core.windows.net/homework/hello.txt"
-storage_account = "nitishiac1791379467"
+pujankhunt@archlinux$ terraform output
+blob_url = "https://pujaniac1791379467.blob.core.windows.net/homework/hello.txt"
+storage_account = "pujaniac1791379467"
 
-zephoryx@fedora$ az storage blob list --account-name nitishiac1791379467 --container-name homework --auth-mode login --query '[].{name:name,size:properties.contentLength}' -o json
+pujankhunt@archlinux$ az storage blob list --account-name pujaniac1791379467 --container-name homework --auth-mode login --query '[].{name:name,size:properties.contentLength}' -o json
 [
   {
     "name": "hello.txt",
@@ -113,11 +113,11 @@ zephoryx@fedora$ az storage blob list --account-name nitishiac1791379467 --conta
   }
 ]
 
-zephoryx@fedora$ terraform plan -out=update.tfplan
+pujankhunt@archlinux$ terraform plan -out=update.tfplan
 data.azurerm_resource_group.lab: Reading...
 data.azurerm_resource_group.lab: Read complete after 0s [id=/subscriptions/<subscription-id>/resourceGroups/rg-devops-homework]
-azurerm_storage_account.lab: Refreshing state... [id=/subscriptions/<subscription-id>/resourceGroups/rg-devops-homework/providers/Microsoft.Storage/storageAccounts/nitishiac1791379467]
-azurerm_storage_container.homework: Refreshing state... [id=/subscriptions/<subscription-id>/resourceGroups/rg-devops-homework/providers/Microsoft.Storage/storageAccounts/nitishiac1791379467/blobServices/default/containers/homework]
+azurerm_storage_account.lab: Refreshing state... [id=/subscriptions/<subscription-id>/resourceGroups/rg-devops-homework/providers/Microsoft.Storage/storageAccounts/pujaniac1791379467]
+azurerm_storage_container.homework: Refreshing state... [id=/subscriptions/<subscription-id>/resourceGroups/rg-devops-homework/providers/Microsoft.Storage/storageAccounts/pujaniac1791379467/blobServices/default/containers/homework]
 # ... output shortened ...
 Plan: 0 to add, 1 to change, 0 to destroy.
 # ... output shortened ...
@@ -126,30 +126,30 @@ Saved the plan to: update.tfplan
 To perform exactly these actions, run the following command to apply:
     terraform apply "update.tfplan"
 
-zephoryx@fedora$ terraform apply update.tfplan
-azurerm_storage_account.lab: Modifying... [id=/subscriptions/<subscription-id>/resourceGroups/rg-devops-homework/providers/Microsoft.Storage/storageAccounts/nitishiac1791379467]
-azurerm_storage_account.lab: Still modifying... [id=/subscriptions/d2fb80fc-da87-4e40-8e95-...ge/storageAccounts/nitishiac1791379467, 00m10s elapsed]
-azurerm_storage_account.lab: Modifications complete after 14s [id=/subscriptions/<subscription-id>/resourceGroups/rg-devops-homework/providers/Microsoft.Storage/storageAccounts/nitishiac1791379467]
+pujankhunt@archlinux$ terraform apply update.tfplan
+azurerm_storage_account.lab: Modifying... [id=/subscriptions/<subscription-id>/resourceGroups/rg-devops-homework/providers/Microsoft.Storage/storageAccounts/pujaniac1791379467]
+azurerm_storage_account.lab: Still modifying... [id=/subscriptions/d2fb80fc-da87-4e40-8e95-...ge/storageAccounts/pujaniac1791379467, 00m10s elapsed]
+azurerm_storage_account.lab: Modifications complete after 14s [id=/subscriptions/<subscription-id>/resourceGroups/rg-devops-homework/providers/Microsoft.Storage/storageAccounts/pujaniac1791379467]
 
 Apply complete! Resources: 0 added, 1 changed, 0 destroyed.
 
 Outputs:
 
-blob_url = "https://nitishiac1791379467.blob.core.windows.net/homework/hello.txt"
-storage_account = "nitishiac1791379467"
+blob_url = "https://pujaniac1791379467.blob.core.windows.net/homework/hello.txt"
+storage_account = "pujaniac1791379467"
 
-zephoryx@fedora$ terraform destroy -auto-approve
+pujankhunt@archlinux$ terraform destroy -auto-approve
 data.azurerm_resource_group.lab: Reading...
 data.azurerm_resource_group.lab: Read complete after 0s [id=/subscriptions/<subscription-id>/resourceGroups/rg-devops-homework]
-azurerm_storage_account.lab: Refreshing state... [id=/subscriptions/<subscription-id>/resourceGroups/rg-devops-homework/providers/Microsoft.Storage/storageAccounts/nitishiac1791379467]
-azurerm_storage_container.homework: Refreshing state... [id=/subscriptions/<subscription-id>/resourceGroups/rg-devops-homework/providers/Microsoft.Storage/storageAccounts/nitishiac1791379467/blobServices/default/containers/homework]
+azurerm_storage_account.lab: Refreshing state... [id=/subscriptions/<subscription-id>/resourceGroups/rg-devops-homework/providers/Microsoft.Storage/storageAccounts/pujaniac1791379467]
+azurerm_storage_container.homework: Refreshing state... [id=/subscriptions/<subscription-id>/resourceGroups/rg-devops-homework/providers/Microsoft.Storage/storageAccounts/pujaniac1791379467/blobServices/default/containers/homework]
 # ... output shortened ...
 Plan: 0 to add, 0 to change, 3 to destroy.
 # ... output shortened ...
-azurerm_storage_account.lab: Destroying... [id=/subscriptions/<subscription-id>/resourceGroups/rg-devops-homework/providers/Microsoft.Storage/storageAccounts/nitishiac1791379467]
+azurerm_storage_account.lab: Destroying... [id=/subscriptions/<subscription-id>/resourceGroups/rg-devops-homework/providers/Microsoft.Storage/storageAccounts/pujaniac1791379467]
 azurerm_storage_account.lab: Destruction complete after 4s
 
 Destroy complete! Resources: 3 destroyed.
 
-zephoryx@fedora$ terraform state list
+pujankhunt@archlinux$ terraform state list
 ```

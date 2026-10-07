@@ -10,7 +10,7 @@ rg = "rg-devops-homework"
 # Reuse the current account on a recovery run instead of replacing it.
 state_dir=ROOT / "18-cloud-terraform/azure-alternative"
 existing=subprocess.run(["terraform", "-chdir="+str(state_dir), "output", "-raw", "storage_account"],capture_output=True,text=True)
-account=existing.stdout.strip() if existing.returncode==0 else "nitishhw" + str(int(time.time()))
+account=existing.stdout.strip() if existing.returncode==0 else "pujanhw" + str(int(time.time()))
 
 def run(args, log, check=True, extra=None):
     print("$ " + " ".join(args), flush=True)

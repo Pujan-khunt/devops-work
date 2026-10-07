@@ -2,7 +2,7 @@ resource "azurerm_kubernetes_cluster" "lab" {
   name                              = "aks-devops-homework"
   location                          = data.azurerm_resource_group.lab.location
   resource_group_name               = data.azurerm_resource_group.lab.name
-  dns_prefix                        = "nitish-homework"
+  dns_prefix                        = "pujan-homework"
   sku_tier                          = "Free"
   role_based_access_control_enabled = true
   local_account_disabled            = true

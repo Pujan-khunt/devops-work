@@ -44,39 +44,39 @@ The Minikube LoadBalancer Service initially remained Pending because it had no c
 ### Commands and results
 
 ```bash
-zephoryx@fedora$ kubectl create namespace homework-s11
+pujankhunt@archlinux$ kubectl create namespace homework-s11
 namespace/homework-s11 created
 
-zephoryx@fedora$ kubectl -n homework-s11 apply -f 10-kubernetes-services/app.yaml
+pujankhunt@archlinux$ kubectl -n homework-s11 apply -f 10-kubernetes-services/app.yaml
 deployment.apps/web created
 
-zephoryx@fedora$ kubectl -n homework-s11 rollout status deployment/web
+pujankhunt@archlinux$ kubectl -n homework-s11 rollout status deployment/web
 Waiting for deployment "web" rollout to finish: 0 of 2 updated replicas are available...
 Waiting for deployment "web" rollout to finish: 1 of 2 updated replicas are available...
 deployment "web" successfully rolled out
 
-zephoryx@fedora$ kubectl -n homework-s11 apply -f 10-kubernetes-services/clusterip.yaml
+pujankhunt@archlinux$ kubectl -n homework-s11 apply -f 10-kubernetes-services/clusterip.yaml
 service/clusterip created
 
-zephoryx@fedora$ kubectl -n homework-s11 apply -f 10-kubernetes-services/nodeport.yaml
+pujankhunt@archlinux$ kubectl -n homework-s11 apply -f 10-kubernetes-services/nodeport.yaml
 service/nodeport created
 
-zephoryx@fedora$ kubectl -n homework-s11 apply -f 10-kubernetes-services/loadbalancer.yaml
+pujankhunt@archlinux$ kubectl -n homework-s11 apply -f 10-kubernetes-services/loadbalancer.yaml
 service/loadbalancer created
 
-zephoryx@fedora$ kubectl -n homework-s11 apply -f 10-kubernetes-services/externalname.yaml
+pujankhunt@archlinux$ kubectl -n homework-s11 apply -f 10-kubernetes-services/externalname.yaml
 service/externalname created
 
-zephoryx@fedora$ kubectl -n homework-s11 apply -f 10-kubernetes-services/headless.yaml
+pujankhunt@archlinux$ kubectl -n homework-s11 apply -f 10-kubernetes-services/headless.yaml
 service/headless created
 
-zephoryx@fedora$ kubectl -n homework-s11 run client --image=busybox:1.37 --restart=Never -- sleep 7200
+pujankhunt@archlinux$ kubectl -n homework-s11 run client --image=busybox:1.37 --restart=Never -- sleep 7200
 pod/client created
 
-zephoryx@fedora$ kubectl -n homework-s11 wait --for=condition=Ready pod/client
+pujankhunt@archlinux$ kubectl -n homework-s11 wait --for=condition=Ready pod/client
 pod/client condition met
 
-zephoryx@fedora$ kubectl -n homework-s11 get svc -o wide
+pujankhunt@archlinux$ kubectl -n homework-s11 get svc -o wide
 NAME           TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)        AGE   SELECTOR
 clusterip      ClusterIP      10.111.252.56    <none>        80/TCP         4s    app=web
 externalname   ExternalName   <none>           example.com   <none>         2s    <none>
@@ -84,26 +84,26 @@ headless       ClusterIP      None             <none>        80/TCP         2s  
 loadbalancer   LoadBalancer   10.98.166.22     <pending>     80:31600/TCP   3s    app=web
 nodeport       NodePort       10.108.135.157   <none>        80:30183/TCP   4s    app=web
 
-zephoryx@fedora$ kubectl -n homework-s11 exec client -- wget -qO- http://clusterip
+pujankhunt@archlinux$ kubectl -n homework-s11 exec client -- wget -qO- http://clusterip
 <h1>Welcome to nginx!</h1>
 
-zephoryx@fedora$ kubectl -n homework-s11 exec client -- wget -qO- http://nodeport
+pujankhunt@archlinux$ kubectl -n homework-s11 exec client -- wget -qO- http://nodeport
 <h1>Welcome to nginx!</h1>
 
-zephoryx@fedora$ kubectl -n homework-s11 exec client -- wget -qO- http://loadbalancer
+pujankhunt@archlinux$ kubectl -n homework-s11 exec client -- wget -qO- http://loadbalancer
 <h1>Welcome to nginx!</h1>
 
-zephoryx@fedora$ kubectl -n homework-s11 exec client -- wget -qO- http://headless
+pujankhunt@archlinux$ kubectl -n homework-s11 exec client -- wget -qO- http://headless
 <h1>Welcome to nginx!</h1>
 
-zephoryx@fedora$ kubectl -n homework-s11 exec client -- nslookup clusterip.homework-s11.svc.cluster.local
+pujankhunt@archlinux$ kubectl -n homework-s11 exec client -- nslookup clusterip.homework-s11.svc.cluster.local
 Server:		10.96.0.10
 Address:	10.96.0.10:53
 
 Name:	clusterip.homework-s11.svc.cluster.local
 Address: 10.111.252.56
 
-zephoryx@fedora$ kubectl -n homework-s11 exec client -- nslookup headless.homework-s11.svc.cluster.local
+pujankhunt@archlinux$ kubectl -n homework-s11 exec client -- nslookup headless.homework-s11.svc.cluster.local
 Server:		10.96.0.10
 Address:	10.96.0.10:53
 
@@ -112,7 +112,7 @@ Address: 10.244.0.52
 Name:	headless.homework-s11.svc.cluster.local
 Address: 10.244.0.51
 
-zephoryx@fedora$ kubectl -n homework-s11 exec client -- nslookup externalname.homework-s11.svc.cluster.local
+pujankhunt@archlinux$ kubectl -n homework-s11 exec client -- nslookup externalname.homework-s11.svc.cluster.local
 Server:		10.96.0.10
 Address:	10.96.0.10:53
 
@@ -128,16 +128,16 @@ Address: 2606:4700:10::6814:179a
 Name:	example.com
 Address: 2606:4700:10::ac42:93f3
 
-zephoryx@fedora$ kubectl -n homework-s11 get svc nodeport -o 'jsonpath={.spec.ports[0].nodePort}'
+pujankhunt@archlinux$ kubectl -n homework-s11 get svc nodeport -o 'jsonpath={.spec.ports[0].nodePort}'
 30183
 
-zephoryx@fedora$ minikube ip
+pujankhunt@archlinux$ minikube ip
 192.168.49.2
 
-zephoryx@fedora$ curl -f --max-time 10 http://192.168.49.2:30183
+pujankhunt@archlinux$ curl -f --max-time 10 http://192.168.49.2:30183
 <h1>Welcome to nginx!</h1>
 
-zephoryx@fedora$ kubectl -n homework-s11 describe svc loadbalancer
+pujankhunt@archlinux$ kubectl -n homework-s11 describe svc loadbalancer
 Name:                     loadbalancer
 Namespace:                homework-s11
 Labels:                   <none>
@@ -148,7 +148,7 @@ External Traffic Policy:  Cluster
 Internal Traffic Policy:  Cluster
 Events:                   <none>
 
-zephoryx@fedora$ kubectl -n homework-s11 get configmap coredns -n kube-system -o yaml
+pujankhunt@archlinux$ kubectl -n homework-s11 get configmap coredns -n kube-system -o yaml
 apiVersion: v1
 data:
   Corefile: |
@@ -164,7 +164,7 @@ metadata:
   resourceVersion: "324"
   uid: fc9370fa-d33b-4958-ba9f-33855261a450
 
-zephoryx@fedora$ kubectl -n homework-s11 logs -n kube-system -l k8s-app=kube-dns --tail=20
+pujankhunt@archlinux$ kubectl -n homework-s11 logs -n kube-system -l k8s-app=kube-dns --tail=20
 [INFO] 10.244.0.34:46446 - 51521 "AAAA IN canary.homework-s10.svc.cluster.local. udp 55 false 512" NOERROR qr,aa,rd 148 0.000423986s
 [INFO] 10.244.0.34:46446 - 60760 "A IN canary.homework-s10.svc.cluster.local. udp 55 false 512" NOERROR qr,aa,rd 108 0.000612513s
 [INFO] 10.244.0.34:44347 - 62414 "AAAA IN canary.homework-s10.svc.cluster.local. udp 55 false 512" NOERROR qr,aa,rd 148 0.000471602s
