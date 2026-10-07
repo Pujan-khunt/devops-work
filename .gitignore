@@ -1,0 +1,27 @@
+.env
+.env.*
+!.env.example
+**/.venv/
+**/__pycache__/
+**/*.pyc
+**/node_modules/
+**/dist/
+**/.terraform/
+**/*.tfstate
+**/*.tfstate.*
+**/tfplan
+**/crash.log
+**/test.db
+**/.pytest_cache/
+**/secrets.local.yaml
+**/kubeconfig*
+
+**/*.tfplan
+
+**/*.tfvars
+**/*.tfvars.json
+
+# Local command logs; submission evidence is embedded in the READMEs.
+**/outputs/
+**/outputs-controller.txt
+**/validation.txt
